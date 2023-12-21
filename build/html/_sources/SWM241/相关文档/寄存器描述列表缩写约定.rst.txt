@@ -7,30 +7,30 @@
    :header-rows: 0
 
 
-   * - 名称             |
-     - 描述                                        |
+   * - 名称             
+     - 描述                                        
 
    * - RO
-     - 只读（read only）                           |
+     - 只读（read only）                           
 
    * - WO
-     - 只写（write only）                          |
+     - 只写（write only）                          
 
    * - R/W
-     - 读/写（read / write）                       |
+     - 读/写（read / write）                       
 
    * - R/W0C
-     - 写0清零（read/write 0 clear）               |
+     - 写0清零（read/write 0 clear）               
 
    * - R/W1C
-     - 写1清零（read/write 1 clear）               |
+     - 写1清零（read/write 1 clear）               
 
    * - AC
-     - 自动清零（auto clear）                      |
+     - 自动清零（auto clear）                      
 
    * - RC
-     - 读清零（read clear）                        |
+     - 读清零（read clear）                        
 
-   * - -
-     - 保留（reserve）                             |
+   * - —
+     - 保留（reserve）                             
 
