@@ -1,0 +1,92 @@
+.. vim: syntax=rst
+
+选型指南
+====
+
+表格 3‑1 SWM241系列MCU选型表
+
+.. list-table::
+   :widths: 33 33 33
+   :header-rows: 0
+
+
+   * - **Peripherals**
+     - **SWM241PBT7-80**
+     - **SWM241KBT7-80**
+
+   * - Voltage (V)
+     - 2.5~5.5
+     - 2.5~5.5
+
+   * - Flash (KB)
+     - 128
+     - 128
+
+   * - SRAM (KB)
+     - 8
+     - 8
+
+   * - I/O
+     - 40
+     - 28
+
+   * - Timer
+     - 8+1
+     - 8+1
+
+   * - RTC
+     - 1
+     - 1
+
+   * - PWM
+     - 15
+     - 12
+
+   * - DMA
+     - 2
+     - 2
+
+   * - SAR ADC
+     - 1(12)
+     - 1(8)
+
+   * - UART
+     - 4
+     - 4
+
+   * - I2C
+     - 2
+     - 2
+
+   * - SPI
+     - 2
+     - 2
+
+   * - CAN
+     - 1
+     - 1
+
+   * - SLED
+     - 4x19
+     - 8x13
+
+   * - SLCD
+     - 4x30
+     - 3x16
+
+   * - CRC
+     - 1
+     - 1
+
+   * - DIV
+     - 1
+     - 1
+
+   * - SAFETY
+     - 1
+     - 1
+
+   * - Package
+     - LQFP44
+     - LQFP32
+

@@ -1,0 +1,36 @@
+.. vim: syntax=rst
+
+寄存器描述列表缩写约定
+============================
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+
+
+   * - 名称             
+     - 描述                                        
+
+   * - RO
+     - 只读（read only）                           
+
+   * - WO
+     - 只写（write only）                          
+
+   * - R/W
+     - 读/写（read / write）                       
+
+   * - R/W0C
+     - 写0清零（read/write 0 clear）               
+
+   * - R/W1C
+     - 写1清零（read/write 1 clear）               
+
+   * - AC
+     - 自动清零（auto clear）                      
+
+   * - RC
+     - 读清零（read clear）                        
+
+   * - —
+     - 保留（reserve）                             
+

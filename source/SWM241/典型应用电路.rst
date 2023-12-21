@@ -1,0 +1,11 @@
+.. vim: syntax=rst
+
+典型应用电路
+====================
+
+.. image:: ../SWM241/media/典型应用电路002.svg
+   :align: center
+   :alt: 功能方框图
+
+图 7‑1典型应用电路图
+

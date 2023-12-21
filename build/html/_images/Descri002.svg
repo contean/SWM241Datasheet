@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- 由 Microsoft Visio, SVG Export 生成 Descri002.svg 页-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="11.5032in" height="6.42672in"
+		viewBox="0 0 828.233 462.724" xml:space="preserve" color-interpolation-filters="sRGB" class="st10">
+	<v:documentProperties v:langID="2052" v:metric="true" v:viewMarkup="false"/>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st2 {fill:#004998;font-family:微软雅黑;font-size:2.39992em;font-weight:bold}
+		.st3 {font-size:1em}
+		.st4 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st5 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st6 {fill:#000000;font-family:宋体;font-size:1.16995em}
+		.st7 {font-family:等线;font-size:1em}
+		.st8 {fill:#000000;font-family:等线;font-size:1.16995em}
+		.st9 {font-family:宋体;font-size:1em}
+		.st10 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>页-1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<g id="shape181-1" v:mID="181" v:groupContext="shape" transform="translate(151.675,-426.483)">
+			<title>工作表.181</title>
+			<desc>S W M 2 4 1 P B T 7–5 0</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="214.901" cy="445.442" width="429.81" height="34.5624"/>
+			<path d="M429.8 428.16 L0 428.16 L0 462.72 L429.8 462.72 L429.8 428.16" class="st1"/>
+			<text x="0" y="454.08" class="st2" v:langID="2052"><v:paragraph/><v:tabList/>S W M 2 <tspan class="st3" v:langID="1033">4</tspan> 1 <tspan
+						class="st3" v:langID="1033">P</tspan> <tspan class="st3" v:langID="1033">B</tspan> T <tspan class="st3"
+						v:langID="1033">7</tspan>–5 0  </text>		</g>
+		<g id="shape189-9" v:mID="189" v:groupContext="shape" transform="translate(144.942,-424.195)">
+			<title>工作表.189</title>
+			<path d="M0 462.72 L68.03 462.72" class="st4"/>
+		</g>
+		<g id="shape190-12" v:mID="190" v:groupContext="shape" transform="translate(467.717,-423.648)">
+			<title>工作表.190</title>
+			<path d="M0 462.72 L49.61 462.72" class="st4"/>
+		</g>
+		<g id="shape191-15" v:mID="191" v:groupContext="shape" transform="translate(644.516,38.5286) rotate(90)">
+			<title>工作表.191</title>
+			<path d="M0 462.72 L59.53 462.72" class="st4"/>
+		</g>
+		<g id="shape192-18" v:mID="192" v:groupContext="shape" transform="translate(57.4331,-362.691)">
+			<title>工作表.192</title>
+			<desc>公司名简写</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="49.4237" cy="448.979" width="98.85" height="27.4887"/>
+			<rect x="0" y="435.235" width="98.8475" height="27.4887" class="st5"/>
+			<text x="0" y="453.54" class="st6" v:langID="2052"><v:paragraph/><v:tabList/>公司名简写</text>		</g>
+		<g id="shape193-21" v:mID="193" v:groupContext="shape" transform="translate(181.792,560.78) rotate(180)">
+			<title>工作表.193</title>
+			<path d="M0 462.72 L181.42 462.72" class="st4"/>
+		</g>
+		<g id="shape194-24" v:mID="194" v:groupContext="shape" transform="translate(695.54,41.3632) rotate(90)">
+			<title>工作表.194</title>
+			<path d="M0 462.72 L102.05 462.72" class="st4"/>
+		</g>
+		<g id="shape195-27" v:mID="195" v:groupContext="shape" transform="translate(57.4331,-8.68388)">
+			<title>工作表.195</title>
+			<desc>保留位默认0 1性能升级 S屏幕领域特定型号 P3P3N Prediver N6N Prediver</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="77.5314" cy="414.602" width="155.07" height="96.244"/>
+			<rect x="0" y="366.48" width="155.063" height="96.244" class="st5"/>
+			<text x="0" y="382.7" class="st6" v:langID="2052"><v:paragraph/><v:tabList/>保留位：默认<tspan class="st7">0<v:newlineChar/></tspan><tspan
+						x="0" dy="1.298em" class="st7">1</tspan>：性能升级<v:newlineChar/><tspan x="0" dy="1.298em" class="st7">S</tspan>：屏幕领域特定型号<v:newlineChar/><tspan
+						x="0" dy="1.298em" class="st7">P</tspan>：<tspan class="st7">3P3N Prediver<v:newlineChar/></tspan><tspan
+						x="0" dy="1.298em" class="st7">N</tspan>：<tspan class="st7">6N Prediver</tspan></text>		</g>
+		<g id="shape196-37" v:mID="196" v:groupContext="shape" transform="translate(57.4331,-145.176)">
+			<title>工作表.196</title>
+			<desc>系列型号 0~9区分 比如USB,LCD等不同外设</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="85.0394" cy="453.608" width="170.08" height="18.2319"/>
+			<path d="M170.08 444.49 L0 444.49 L0 462.72 L170.08 462.72 L170.08 444.49" class="st1"/>
+			<text x="0" y="439.94" class="st6" v:langID="2052"><v:paragraph/><v:tabList/>系列型号：<v:newlineChar/><tspan x="0"
+						dy="1.298em" class="st7">0~9</tspan>区分<v:newlineChar/><tspan x="0" dy="1.298em" class="st3">比如</tspan><tspan
+						class="st7">USB,LCD</tspan>等不同外设</text>		</g>
+		<g id="shape197-44" v:mID="197" v:groupContext="shape" transform="translate(57.4331,-203.655)">
+			<title>工作表.197</title>
+			<desc>芯片系列 0数字定制芯片 11系列 22系列 33系列</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="77.5314" cy="414.602" width="155.07" height="96.244"/>
+			<rect x="0" y="366.48" width="155.063" height="96.244" class="st5"/>
+			<text x="0" y="382.7" class="st6" v:langID="2052"><v:paragraph/><v:tabList/>芯片系列：<v:newlineChar/><tspan x="0"
+						dy="1.298em" class="st7">0</tspan>：数字定制芯片<v:newlineChar/><tspan x="0" dy="1.298em" class="st7">1</tspan>：<tspan
+						class="st7" v:langID="1033">1</tspan>系列<v:newlineChar/><tspan x="0" dy="1.298em" class="st7">2</tspan>：<tspan
+						class="st7">2</tspan>系列<v:newlineChar/><tspan x="0" dy="1.298em" class="st7">3</tspan>：<tspan class="st7">3</tspan>系列</text>		</g>
+		<g id="shape198-54" v:mID="198" v:groupContext="shape" transform="translate(57.4331,-320.171)">
+			<title>工作表.198</title>
+			<desc>CORTEX-M系列</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="49.4237" cy="448.979" width="98.85" height="27.4887"/>
+			<rect x="0" y="435.235" width="98.8475" height="27.4887" class="st5"/>
+			<text x="0" y="453.54" class="st8" v:langID="2052"><v:paragraph/><v:tabList/>CORTEX-M<tspan class="st9">系列</tspan></text>		</g>
+		<g id="shape199-58" v:mID="199" v:groupContext="shape" transform="translate(534.15,-372.949)">
+			<title>工作表.199</title>
+			<desc>表示引脚间距大小</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="66.7948" cy="453.608" width="133.59" height="18.2319"/>
+			<path d="M133.59 444.49 L0 444.49 L0 462.72 L133.59 462.72 L133.59 444.49" class="st1"/>
+			<text x="0" y="458.16" class="st6" v:langID="2052"><v:paragraph/><v:tabList/>表示引脚间距大小</text>		</g>
+		<g id="shape200-62" v:mID="200" v:groupContext="shape" transform="translate(538.958,-129.849)">
+			<title>工作表.200</title>
+			<desc>FLASH大小 28KB 416KB632KB 748KB 864KB996KB B120KB/128KBC248/256...</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="108.684" cy="414.602" width="217.37" height="96.244"/>
+			<rect x="0" y="366.48" width="217.367" height="96.244" class="st5"/>
+			<text x="0" y="382.7" class="st8" v:langID="2052"><v:paragraph/><v:tabList/>FLASH<tspan class="st9">大小</tspan><tspan
+						class="st9">：<v:newlineChar/></tspan><tspan x="0" dy="1.298em" class="st3">2</tspan><tspan class="st9">：</tspan>8KB<tspan
+						class="st9">；</tspan>    4<tspan class="st9">：</tspan>16KB<tspan class="st9">；</tspan>6<tspan class="st9">：</tspan>32KB<tspan
+						class="st9">；<v:newlineChar/></tspan><tspan x="0" dy="1.298em" class="st3">7</tspan><tspan class="st9">：</tspan>48KB<tspan
+						class="st9">；</tspan>  8<tspan class="st9">：</tspan>64KB<tspan class="st9">；</tspan>9<tspan class="st9">：</tspan>96KB<v:newlineChar/><tspan
+						x="0" dy="1.298em" class="st3">B</tspan><tspan class="st9">：</tspan>120KB<tspan class="st3" v:langID="1033">/128KB</tspan><tspan
+						class="st9">；</tspan>C<tspan class="st9">：</tspan>248/256KB<v:newlineChar/><tspan x="0" dy="1.298em"
+						class="st3">E</tspan><tspan class="st9">：</tspan>512KB<tspan class="st9">；</tspan>G<tspan class="st9">：</tspan>1024KB</text>		</g>
+		<g id="shape201-89" v:mID="201" v:groupContext="shape" transform="translate(538.958,-13.4951)">
+			<title>工作表.201</title>
+			<desc>引脚数量 Q16pinF20pinE24pinG28pinK32pinT36pinD40pinP44pinC48pinJ5...</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="144.638" cy="414.602" width="289.28" height="96.244"/>
+			<rect x="0" y="366.48" width="289.276" height="96.244" class="st5"/>
+			<text x="0" y="382.7" class="st6" v:langID="2052"><v:paragraph/><v:tabList/>引脚数量：<v:newlineChar/><tspan x="0"
+						dy="1.298em" class="st7">Q</tspan>：<tspan class="st7">16pin</tspan>；<tspan class="st7">F</tspan>：<tspan
+						class="st7">20pin</tspan>；<tspan class="st7">E</tspan>：<tspan class="st7">24pin</tspan>；<tspan class="st7">G</tspan>：<tspan
+						class="st7">28pin</tspan>；<tspan x="0" dy="1.298em" class="st7">K</tspan>：<tspan class="st7">32pin</tspan>；<tspan
+						class="st7">T</tspan>：<tspan class="st7">36pin</tspan>；<tspan class="st7">D</tspan>：<tspan class="st7">40pin</tspan>；<tspan
+						class="st7">P</tspan>：<tspan class="st7">44pin</tspan>；<tspan x="0" dy="1.298em" class="st7">C</tspan>：<tspan
+						class="st7">48pin</tspan>；<tspan class="st7">J</tspan>：<tspan class="st7">52pin</tspan>；<tspan class="st7"> </tspan><tspan
+						class="st7">R</tspan>：<tspan class="st7">64pin</tspan>；<tspan class="st7">V</tspan>：<tspan class="st7">100pin</tspan>；<tspan
+						x="0" dy="1.298em" class="st7">W</tspan>：<tspan class="st7">128pin</tspan>；<tspan class="st7">Z</tspan>：<tspan
+						class="st7">144pin</tspan>；<tspan class="st7"> </tspan><tspan class="st7">I</tspan>：<tspan class="st7">176pin</tspan></text>		</g>
+		<g id="shape202-124" v:mID="202" v:groupContext="shape" transform="translate(538.958,-234.731)">
+			<title>工作表.202</title>
+			<desc>封装类型 PTSSOP SSSOP TLQFPVTQFP UQFN HBGA</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="115.51" cy="432.318" width="231.03" height="60.811"/>
+			<rect x="0" y="401.913" width="231.021" height="60.811" class="st5"/>
+			<text x="0" y="418.65" class="st6" v:langID="2052"><v:paragraph/><v:tabList/>封装类型：<v:newlineChar/><tspan x="0"
+						dy="1.298em" class="st7">P</tspan>：<tspan class="st7">TSSOP</tspan>；<tspan class="st7"> </tspan><tspan
+						class="st7">S</tspan>：<tspan class="st7">SSOP</tspan>；<tspan class="st7"> </tspan><tspan class="st7">T</tspan>：<tspan
+						class="st7">LQFP</tspan>；<tspan x="0" dy="1.298em" class="st7">V</tspan>：<tspan class="st7">TQFP</tspan>；<tspan
+						class="st7">   </tspan><tspan class="st7">U</tspan>：<tspan class="st7">QFN</tspan>；<tspan class="st7"> </tspan><tspan
+						class="st7">H</tspan>：<tspan class="st7">BGA</tspan></text>		</g>
+		<g id="shape203-143" v:mID="203" v:groupContext="shape" transform="translate(538.958,-302.941)">
+			<title>工作表.203</title>
+			<desc>工作温度 6-40~85 7-40~105</desc>
+			<v:textBlock v:margins="rect(0,0,0,0)" v:tabSpace="42.5197"/>
+			<v:textRect cx="115.51" cy="434.377" width="231.03" height="56.6929"/>
+			<rect x="0" y="406.031" width="231.021" height="56.6929" class="st5"/>
+			<text x="0" y="420.71" class="st6" v:langID="2052"><v:paragraph/><v:tabList/>工作温度：<v:newlineChar/><tspan x="0"
+						dy="1.298em" class="st7">6</tspan>：<tspan class="st7">-</tspan><tspan class="st7">40~85<v:newlineChar/></tspan><tspan
+						x="0" dy="1.298em" class="st7">7</tspan>：<tspan class="st7">-</tspan><tspan class="st7">40~105</tspan></text>		</g>
+		<g id="shape204-152" v:mID="204" v:groupContext="shape" transform="translate(490.394,-366.955)">
+			<title>工作表.204</title>
+			<path d="M0 406.03 L0 462.72 L319.84 462.72" class="st4"/>
+		</g>
+		<g id="shape205-155" v:mID="205" v:groupContext="shape" transform="translate(425.197,-302.305)">
+			<title>工作表.205</title>
+			<path d="M0 338.55 L0 462.72 L385.04 462.72" class="st4"/>
+		</g>
+		<g id="shape206-158" v:mID="206" v:groupContext="shape" transform="translate(400.06,-234.274)">
+			<title>工作表.206</title>
+			<path d="M0 270.51 L0 462.72 L410.17 462.72" class="st4"/>
+		</g>
+		<g id="shape207-161" v:mID="207" v:groupContext="shape" transform="translate(372.281,-130.645)">
+			<title>工作表.207</title>
+			<path d="M0 166.89 L0 462.72 L437.95 462.72" class="st4"/>
+		</g>
+		<g id="shape208-164" v:mID="208" v:groupContext="shape" transform="translate(807.508,36.2406) rotate(90)">
+			<title>工作表.208</title>
+			<path d="M0 462.72 L422.94 462.72" class="st4"/>
+		</g>
+		<g id="shape209-167" v:mID="209" v:groupContext="shape" transform="translate(344.784,-3.54276)">
+			<title>工作表.209</title>
+			<path d="M0 462.72 L463.09 462.72" class="st4"/>
+		</g>
+		<g id="shape210-170" v:mID="210" v:groupContext="shape" transform="translate(232.816,606.134) rotate(180)">
+			<title>工作表.210</title>
+			<path d="M0 462.72 L232.44 462.72" class="st4"/>
+		</g>
+		<g id="shape211-173" v:mID="211" v:groupContext="shape" transform="translate(0.375011,-200.258)">
+			<title>工作表.211</title>
+			<path d="M263.62 241.62 L263.62 462.72 L0 462.72" class="st4"/>
+		</g>
+		<g id="shape212-176" v:mID="212" v:groupContext="shape" transform="translate(0.375012,-120.888)">
+			<title>工作表.212</title>
+			<path d="M291.97 162.25 L291.97 462.72 L0 462.72" class="st4"/>
+		</g>
+		<g id="shape213-179" v:mID="213" v:groupContext="shape" transform="translate(0.375004,-0.375)">
+			<title>工作表.213</title>
+			<path d="M317.48 41.74 L317.48 462.72 L0 462.72" class="st4"/>
+		</g>
+	</g>
+</svg>

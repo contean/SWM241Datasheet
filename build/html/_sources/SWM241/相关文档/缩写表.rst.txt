@@ -1,0 +1,67 @@
+.. vim: syntax=rst
+
+缩写表
+==============
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+
+
+   * - 名称             |
+     - 描述                                        |
+
+   * - ACMP
+     - Analog Comparator Controller
+
+   * - ADC
+     - Analog-to-Digital Converter
+
+   * - AES
+     - Advanced Encryption Standard
+
+   * - APB
+     - Advanced Peripheral Bus
+
+   * - AHB
+     - Advanced High-Performance Bus
+
+   * - BOD
+     - Brown-out Detection
+
+   * - CAN
+     - Controller Area Network
+
+   * - PWM
+     - Pulse Width Modulation
+
+   * - FIFO
+     - First In, First Out
+
+   * - GPIO
+     - General-Purpose Input/Output
+
+   * - IAP
+     - In Application Programming
+
+   * - ICP
+     - In Circuit Programming
+
+   * - ISP
+     - In System Programming
+
+   * - LDO
+     - Low Dropout Regulator
+
+   * - MPU
+     - Memory Protection Unit
+
+   * - NVIC
+     - Nested Vectored Interrupt Controller
+
+   * - DMA
+     - Direct Memory Access
+
+   * - PLL
+     - Phase-Locked Loop
+

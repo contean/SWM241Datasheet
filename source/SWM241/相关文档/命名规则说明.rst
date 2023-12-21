@@ -1,0 +1,7 @@
+.. vim: syntax=rst
+
+命名规则说明
+=======================
+.. image:: ../media/命名规则说明.svg
+  :align: center
+  :alt: 命名规则说明

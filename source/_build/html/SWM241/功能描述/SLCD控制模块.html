@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="**zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SLCD控制模块（SLCD） &mdash; SWM241数据手册 v1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SAFETY模块（SAFETY）" href="SAFETY%E6%A8%A1%E5%9D%97.html" />
+    <link rel="prev" title="SLED控制模块（SLED）" href="SLED%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SWM241数据手册
+              <img src="../../_static/logo.ico" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/index.html">相关文档</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%A6%82%E8%BF%B0.html">概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%89%B9%E6%80%A7.html"><strong>特性</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97.html"><strong>选型指南</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%8A%9F%E8%83%BD%E6%96%B9%E6%A1%86%E5%9B%BE.html">功能方框图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%AE%A1%E8%84%9A%E9%85%8D%E7%BD%AE.html"><strong>管脚配置</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">功能描述</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="%E5%AD%98%E5%82%A8%E5%99%A8%E6%98%A0%E5%B0%84.html">存储器映射</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E5%99%A8.html">中断控制器（NVIC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86.html">系统管理（SYSCON）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PORTCON.html">PORTCON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%80%9A%E7%94%A8IO.html">通用I/O （GPIO）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8A%A0%E5%BC%BA%E5%9E%8B%E5%AE%9A%E6%97%B6%E5%99%A8.html">加强型定时器（TIMER）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%9C%8B%E9%97%A8%E7%8B%97%E5%AE%9A%E6%97%B6%E5%99%A8.html">看门狗定时器（WDT）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%9E%E6%97%B6%E6%97%B6%E9%92%9F.html">实时时钟（RTC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UART%E6%8E%A5%E5%8F%A3%E6%8E%A7%E5%88%B6%E5%99%A8.html">UART接口控制器（UART）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="I2C%E6%80%BB%E7%BA%BF%E6%8E%A7%E5%88%B6%E5%99%A8.html">I2C总线控制器（I2C）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPI%E6%80%BB%E7%BA%BF%E6%8E%A7%E5%88%B6%E5%99%A8.html">SPI总线控制器（SPI）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%B1%80%E5%9F%9F%E7%BD%91%E6%8E%A7%E5%88%B6%E5%99%A8.html">局域网控制器（CAN）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%84%89%E5%86%B2%E5%AE%BD%E5%BA%A6%E8%B0%83%E5%88%B6.html">脉冲宽度调制（PWM）发生器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%A8%A1%E6%8B%9F%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2%E5%99%A8.html">模拟数字转换器（SAR ADC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98%E5%AD%98%E5%8F%96.html">直接内存存取（DMA）控制器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CRC%E8%AE%A1%E7%AE%97%E5%8D%95%E5%85%83.html">CRC计算单元（CRC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%99%A4%E6%B3%95%E5%99%A8.html">除法器（DIV）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SLED%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97.html">SLED控制模块（SLED）</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SLCD控制模块（SLCD）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">模块结构框图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">功能描述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lcd">LCD显示</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">按键扫描</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">驱动波形</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">数据显示映射表</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">寄存器映射</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">寄存器描述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#slcdcr">SLCD控制寄存器CR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slcd0-data0">SLCD数据寄存器0 DATA0</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slcd1-data1">SLCD数据寄存器1 DATA1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slcd2-data2">SLCD数据寄存器2 DATA2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slcd3-data3">SLCD数据寄存器3 DATA3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="SAFETY%E6%A8%A1%E5%9D%97.html">SAFETY模块（SAFETY）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FLASH%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%8EISP%E6%93%8D%E4%BD%9C.html">FLASH控制器与ISP操作</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E7%94%B5%E8%B7%AF.html">典型应用电路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%94%B5%E6%B0%94%E7%89%B9%E6%80%A7.html">电气特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8.html">封装尺寸</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95.html">版本记录</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SWM241数据手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">功能描述</a></li>
+      <li class="breadcrumb-item active">SLCD控制模块（SLCD）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/SWM241/功能描述/SLCD控制模块.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="slcd-slcd">
+<h1>SLCD控制模块（SLCD）<a class="headerlink" href="#slcd-slcd" title="Permalink to this heading"></a></h1>
+<p>概述
+~~</p>
+<p>SWM241系列所有型号SLCD控制模块操作均相同，使用前需使能SLCD控制模块时钟, 并通过设置PA15输出高电平开启SLCD电源域。</p>
+<p>特性
+~~</p>
+<ul class="simple">
+<li><p>LCD帧频率设置</p></li>
+<li><p>4 COM*32 SEG</p></li>
+<li><p>BIAS和DUTY设置</p></li>
+<li><p>根据图形显示数据，产生驱动电平控制时序</p></li>
+<li><p>本模块仅支持TYPEB驱动波形</p></li>
+<li><p>支持按键扫描功能</p></li>
+</ul>
+<section id="id1">
+<h2>模块结构框图<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p><img alt="SLCD控制002" src="SWM241/功能描述/mediaSLCD控制002.emf" /></p>
+<p>图 6‑65 SLCD控制模块结构框图</p>
+</section>
+<section id="id2">
+<h2>功能描述<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>本模块为SLCD控制器模块。模块支持标准APB总线操作，只支持WORD读写。</p>
+<section id="lcd">
+<h3>LCD显示<a class="headerlink" href="#lcd" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>配置LCDC_CR寄存器</p>
+<ul>
+<li><p>CLKDIV：指示系统高频频率分频</p></li>
+<li><p>KEYSCAN：LCD按键扫描</p></li>
+<li><p>DRIVSEL：LCD驱动电流</p></li>
+<li><p>SCANFRQ：LCD帧频率</p></li>
+<li><p>DUTY：LCD扫描模式</p></li>
+<li><p>BIAS：LCD偏压</p></li>
+<li><p>DISP：LCD显示模式</p></li>
+<li><p>DRIVEEN：LCD驱动使能</p></li>
+</ul>
+</li>
+<li><p>配置LCD显示数据寄存器</p></li>
+<li><p>配置LCDC_CR寄存器</p>
+<ul>
+<li><p>SCANEN：LCD扫描使能</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h3>按键扫描<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>LCD驱动端口如果和IO端口复用，可以通过按键扫描功能来配合GPIO端口实现组合按键，同时不影响LCD驱动显示。当按键扫描功能控制位使能后，所有复用端口的波形都会在每个COM开始的时候出现一个约30us宽度的低脉冲；此脉冲可以用作IO中断唤醒信号。</p>
+<p>使用软件实现按键扫描功能的步骤如下：</p>
+<ul class="simple">
+<li><p>把GPIO设置为输入端口，并使能上拉；</p></li>
+<li><p>启动GPIO中断功能；</p></li>
+<li><p>启动按键扫描功能；</p></li>
+<li><p>等待按键；</p></li>
+<li><p>当有按键按下时，系统进入GPIO中断处理子程序：</p>
+<ul>
+<li><p>设置LCD为显示空白状态，并取消按键扫描功能；</p></li>
+<li><p>设置IO为IO功能，并输出按键探测信号；</p></li>
+<li><p>读取GPIO端口，判断按键；</p></li>
+<li><p>设置IO为LCD驱动，并启动LCD显示；</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3>驱动波形<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>表格 6‑4 1/3 BIAS Driver Output Levels</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Driver</p></td>
+<td><p>Mode</p></td>
+<td><p>Alternation</p></td>
+<td><p>Output Level</p></td>
+</tr>
+<tr class="row-even"><td><p>COMMON</p></td>
+<td><p>Selected</p></td>
+<td><p>H</p></td>
+<td><p>VDD</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>L</p></td>
+<td><p>GND</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Non-Selected</p></td>
+<td><p>H</p></td>
+<td><p>2*VDD/3</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>L</p></td>
+<td><p>VDD/3</p></td>
+</tr>
+<tr class="row-even"><td><p>SEGMENT</p></td>
+<td><p>Selected</p></td>
+<td><p>H</p></td>
+<td><p>VDD</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>L</p></td>
+<td><p>GND</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Non-Selected</p></td>
+<td><p>H</p></td>
+<td><p>2*VDD/3</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>L</p></td>
+<td><p>VDD/3</p></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="SLCD控制003" src="SWM241/功能描述/mediaSLCD控制003.emf" /></p>
+<p>图 6‑66 1/4DUTY和1/3BIAS驱动模式波形</p>
+<p><img alt="SLCD控制004" src="SWM241/功能描述/mediaSLCD控制004.emf" /></p>
+<p>图 6‑67 1/3DUTY和1/3BIAS驱动模式波形</p>
+<p>表格 6‑5 1/2 BIAS Driver Output Levels</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Driver</p></td>
+<td><p>Mode</p></td>
+<td><p>Alternation</p></td>
+<td><p>Output Level</p></td>
+</tr>
+<tr class="row-even"><td><p>COMMON</p></td>
+<td><p>Selected</p></td>
+<td><p>H</p></td>
+<td><p>VDD</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>L</p></td>
+<td><p>GND</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Non-Selected</p></td>
+<td><p>H</p></td>
+<td><p>VDD/2</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>L</p></td>
+<td><p>VDD/2</p></td>
+</tr>
+<tr class="row-even"><td><p>SEGMENT</p></td>
+<td><p>Selected</p></td>
+<td><p>H</p></td>
+<td><p>VDD</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>L</p></td>
+<td><p>GND</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Non-Selected</p></td>
+<td><p>H</p></td>
+<td><p>VDD</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>L</p></td>
+<td><p>GND</p></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="SLCD控制005" src="SWM241/功能描述/mediaSLCD控制005.emf" /></p>
+<p>图 6‑68 1/3DUTY和1/2BIAS驱动模式波形</p>
+</section>
+<section id="id5">
+<h3>数据显示映射表<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>表格 6‑6 显示数据映射表</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td></td>
+<td><p>SEG0</p></td>
+<td><p>SEG1</p></td>
+<td><p>……</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>COM0</p></td>
+<td><p>LCDC _DATA0/B0</p></td>
+<td><p>LC DATA0/B1</p></td>
+<td><p>……</p></td>
+<td><p>LC DAT B30</p></td>
+<td><p>LC DAT B31</p></td>
+</tr>
+<tr class="row-odd"><td><p>COM1</p></td>
+<td><p>LCDC _DATA1/B0</p></td>
+<td><p>LC DATA1/B1</p></td>
+<td><p>……</p></td>
+<td><p>LC DAT B30</p></td>
+<td><p>LC DAT B31</p></td>
+</tr>
+<tr class="row-even"><td><p>COM2</p></td>
+<td><p>LCDC _DATA2/B0</p></td>
+<td><p>LC DATA2/B1</p></td>
+<td><p>……</p></td>
+<td><p>LC DAT B30</p></td>
+<td><p>LC DAT B31</p></td>
+</tr>
+<tr class="row-odd"><td><p>COM3</p></td>
+<td><p>LCDC _DATA3/B0</p></td>
+<td><p>LC DATA3/B1</p></td>
+<td><p>……</p></td>
+<td><p>LC DAT B30</p></td>
+<td><p>LC DAT B31</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="id6">
+<h2>寄存器映射<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称   |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line">|
+|</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+</td>
+<td><p>描述                       | | | |</p></td>
+</tr>
+<tr class="row-even"><td><p>SLCDBASE：0 <a href="#id7"><span class="problematic" id="id8">|</span></a>x400A9800</p></td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>CR</p></td>
+<td><p>0x00</p></td>
+<td></td>
+<td><p>0x F0000</p></td>
+<td><p>SLCD配置寄存器             |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA0</p></td>
+<td><p>0x10</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>SLCD数据寄存器0            |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATA1</p></td>
+<td><p>0x14</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>SLCD数据寄存器1            |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA2</p></td>
+<td><p>0x18</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>SLCD数据寄存器2            |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATA3</p></td>
+<td><p>0x1c</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>SLCD数据寄存器3            |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id9">
+<h2>寄存器描述<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<section id="slcdcr">
+<h3>SLCD控制寄存器CR<a class="headerlink" href="#slcdcr" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id10"><span class="problematic" id="id11">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>CR</p></td>
+<td><p>0x00</p></td>
+<td></td>
+<td><p>0 3F0000</p></td>
+<td><p>SLCD配置寄存器             |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td><p>CL K_DIV</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>K EYSCAN</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>SCANFRQ</p></td>
+<td></td>
+<td><p>DUTY</p></td>
+<td><p>BIAS</p></td>
+<td><p>DISP</p></td>
+<td></td>
+<td><p>S CANEN</p></td>
+<td><p>DRIVEN</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:22</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>21:16</p></td>
+<td><p>CLKDIV</p></td>
+<td><p>系统分频控制                                |</p>
+<p>Flcd = PCLK2 / (CLKDIV*32)</p>
+<p>注：由                                      | CD模块挂载在APB2总线上，APB2总线时钟(PCLK  | 系统时钟(SYSCLK)的二分频，故PCLK2=SYSCLK/2 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>15:11</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>KEYSCAN</p></td>
+<td><p>按键扫描功能                                |</p>
+<p>1使能                                       |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>9:8</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>7:6</p></td>
+<td><p>SCANFRQ</p></td>
+<td><p>LCD帧频率控制                               |</p>
+<p>00：Flcd/256 Hz                             |</p>
+<p>01：Flcd/128 Hz                             |</p>
+<p>10：Flcd/64 Hz                              |</p>
+<p>11：Flcd/32 Hz                              |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>DUTY</p></td>
+<td><p>LCD扫描模式选择                             |</p>
+<p>0：1/4 Duty                                 |</p>
+<p>1：1/3 Duty                                 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>BIAS</p></td>
+<td><p>LCD偏压模式选择                             |</p>
+<p>0：1/3 Bias                                 |</p>
+<p>1：1/2 Bias                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>3:2</p></td>
+<td><p>DISP</p></td>
+<td><p>LCD显示模式                                 |</p>
+<p>00：正常显示                                |</p>
+<p>01：显示空白                                |</p>
+<p>10：显示全部                                |</p>
+<p>11：保留                                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>SCANEN</p></td>
+<td><p>LCD扫描电路使能                             |</p>
+<p>0：不使能                                   |</p>
+<p>1：使能                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>DRIVEN</p></td>
+<td><p>LCD驱动电路使能                             |</p>
+<p>0：不使能                                   |</p>
+<p>1：使能                                     |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slcd0-data0">
+<h3>SLCD数据寄存器0 DATA0<a class="headerlink" href="#slcd0-data0" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id12"><span class="problematic" id="id13">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATA0</p></td>
+<td><p>0x10</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>SLCD数据寄存器0            |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DATA0</p></td>
+<td><p>LCD数据寄存器0                              |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slcd1-data1">
+<h3>SLCD数据寄存器1 DATA1<a class="headerlink" href="#slcd1-data1" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id14"><span class="problematic" id="id15">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATA1</p></td>
+<td><p>0x14</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>SLCD数据寄存器1            |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DATA1</p></td>
+<td><p>LCD数据寄存器1                              |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slcd2-data2">
+<h3>SLCD数据寄存器2 DATA2<a class="headerlink" href="#slcd2-data2" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id16"><span class="problematic" id="id17">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATA2</p></td>
+<td><p>0x18</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>SLCD数据寄存器2            |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DATA2</p></td>
+<td><p>LCD数据寄存器2                              |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slcd3-data3">
+<h3>SLCD数据寄存器3 DATA3<a class="headerlink" href="#slcd3-data3" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id18"><span class="problematic" id="id19">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATA3</p></td>
+<td><p>0x1c</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>SLCD数据寄存器3            |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DATA</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DATA3</p></td>
+<td><p>LCD数据寄存器3                              |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SLED%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97.html" class="btn btn-neutral float-left" title="SLED控制模块（SLED）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SAFETY%E6%A8%A1%E5%9D%97.html" class="btn btn-neutral float-right" title="SAFETY模块（SAFETY）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, synwit.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

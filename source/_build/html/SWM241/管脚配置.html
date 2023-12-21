@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="**zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管脚配置 &mdash; SWM241数据手册 v1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="功能描述" href="%E5%8A%9F%E8%83%BD%E6%8F%8F%E8%BF%B0/index.html" />
+    <link rel="prev" title="功能方框图" href="%E5%8A%9F%E8%83%BD%E6%96%B9%E6%A1%86%E5%9B%BE.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SWM241数据手册
+              <img src="../_static/logo.ico" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/index.html">相关文档</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%A6%82%E8%BF%B0.html">概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%89%B9%E6%80%A7.html"><strong>特性</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97.html"><strong>选型指南</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8A%9F%E8%83%BD%E6%96%B9%E6%A1%86%E5%9B%BE.html">功能方框图</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>管脚配置</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#swm241pbt7">SWM241PBT7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#swm241kbt7">SWM241KBT7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">管脚定义</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">功能描述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">管脚复用功能</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8A%9F%E8%83%BD%E6%8F%8F%E8%BF%B0/index.html">功能描述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E7%94%B5%E8%B7%AF.html">典型应用电路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%94%B5%E6%B0%94%E7%89%B9%E6%80%A7.html">电气特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8.html">封装尺寸</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95.html">版本记录</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SWM241数据手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><strong>管脚配置</strong></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/SWM241/管脚配置.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><strong>管脚配置</strong><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<section id="swm241pbt7">
+<h2>SWM241PBT7<a class="headerlink" href="#swm241pbt7" title="Permalink to this heading"></a></h2>
+<img alt="PBT7封装管脚配置图" class="align-center" src="../_images/PBT7.svg" /><p>图 5‑1 PBT7封装管脚配置图</p>
+</section>
+<section id="swm241kbt7">
+<h2>SWM241KBT7<a class="headerlink" href="#swm241kbt7" title="Permalink to this heading"></a></h2>
+<img alt="KBT7封装管脚配置图" class="align-center" src="../_images/KBT7.svg" /><p>图 5‑2 KBT7封装管脚配置图</p>
+</section>
+<section id="id2">
+<h2>管脚定义<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>PBT7</p>
+<p>管脚号</p>
+</td>
+<td><p>KBT7</p>
+<p>管脚号</p>
+</td>
+<td><p>管脚名称</p></td>
+<td><p>类型</p></td>
+<td><p>复用功能</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>/</p></td>
+<td><p>A4</p></td>
+<td><p>I/O</p></td>
+<td><p>UART0TX</p>
+<p>PWM1AN</p>
+<p>T7I</p>
+<p>T7O</p>
+<p>LCD_SEG19</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>A5</p></td>
+<td><p>I/O</p></td>
+<td><p>UART0RX</p>
+<p>UART0TX</p>
+<p>PWM0BN</p>
+<p>ISP</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>RESETn</p></td>
+<td><p>I/O</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>/</p></td>
+<td><p>A6</p></td>
+<td><p>I/O</p></td>
+<td><p>PWM_CLK0</p>
+<p>LCD_SEG20</p>
+<p>XLI</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>/</p></td>
+<td><p>D0</p></td>
+<td><p>I/O</p></td>
+<td><p>UART0RTS</p>
+<p>PWM0AN</p>
+<p>LCD_SEG21</p>
+<p>XLO</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>3</p></td>
+<td><p>D1</p></td>
+<td><p>I/O</p></td>
+<td><p>UART0CTS</p>
+<p>PWM0A</p>
+<p>LCD_SEG22</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>4</p></td>
+<td><p>D2</p></td>
+<td><p>I/O</p></td>
+<td><p>XI</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>5</p></td>
+<td><p>D3</p></td>
+<td><p>I/O</p></td>
+<td><p>PWM_CLK1</p>
+<p>XO</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>6</p></td>
+<td><p>CAP</p></td>
+<td><p>S</p></td>
+<td><p>注：需要对地连接一个1uF电容</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>7</p></td>
+<td><p>VSS</p></td>
+<td><p>S</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>8</p></td>
+<td><p>VDD</p></td>
+<td><p>S</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>/</p></td>
+<td><p>D4</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SCL</p>
+<p>HALL1</p>
+<p>LCD_SEG23</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>/</p></td>
+<td><p>D5</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SDA</p>
+<p>HALL2</p>
+<p>LCD_COM0</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>9</p></td>
+<td><p>D6</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SCL</p>
+<p>UART1RTS</p>
+<p>CAN0TX</p>
+<p>PWM0BRK</p>
+<p>HALL0</p>
+<p>LED_COM0</p>
+<p>LCD_COM1</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>10</p></td>
+<td><p>D7</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SDA</p>
+<p>UART1CTS</p>
+<p>CAN0RX</p>
+<p>PWM2AN</p>
+<p>LED_COM1</p>
+<p>LCD_COM2</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>11</p></td>
+<td><p>D8</p></td>
+<td><p>I/O</p></td>
+<td><p>PWM2A</p>
+<p>HALL0</p>
+<p>T3I</p>
+<p>T3O</p>
+<p>LED_COM2</p>
+<p>LCD_COM3</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>12</p></td>
+<td><p>D9</p></td>
+<td><p>I/O</p></td>
+<td><p>UART1TX</p>
+<p>HALL1</p>
+<p>T3I</p>
+<p>T3O</p>
+<p>LED_COM3</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>/</p></td>
+<td><p>13</p></td>
+<td><p>A0</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI0SSEL</p>
+<p>UART1RX</p>
+<p>HALL2</p>
+<p>LED_COM4</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>/</p></td>
+<td><p>14</p></td>
+<td><p>A1</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C1SCL</p>
+<p>SPI0SCLK</p>
+<p>PWMBRK1</p>
+<p>LED_COM5</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>/</p></td>
+<td><p>15</p></td>
+<td><p>A2</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C1SDA</p>
+<p>SPI0MISO</p>
+<p>UART2TX</p>
+<p>LED_COM6</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>/</p></td>
+<td><p>16</p></td>
+<td><p>C0</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI0MOSI</p>
+<p>UART2RX</p>
+<p>PWM2BN</p>
+<p>LED_COM7</p>
+<p>LCD_SEG24</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>/</p></td>
+<td><p>C1</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI1MOSI</p>
+<p>PWM2B</p>
+<p>T5O</p>
+<p>LED_SEG17</p>
+<p>LCD_SEG25</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>/</p></td>
+<td><p>C2</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SDA</p>
+<p>SPI1MISO</p>
+<p>T5I</p>
+<p>LED_SEG18</p>
+<p>LCD_SEG26</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>/</p></td>
+<td><p>C3</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SCL</p>
+<p>SPI1SCLK</p>
+<p>PWM2AN</p>
+<p>T1I</p>
+<p>T1O</p>
+<p>LED_SEG19</p>
+<p>LCD_SEG27</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>/</p></td>
+<td><p>D10</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C1SCL</p>
+<p>SPI0SCLK</p>
+<p>PWM2B</p>
+<p>RTC_1HZ</p>
+<p>LCD_SEG28</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>/</p></td>
+<td><p>D11</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C1SDA</p>
+<p>SPI0MISO</p>
+<p>UART3RX</p>
+<p>PWM2A</p>
+<p>LCD_SEG29</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>/</p></td>
+<td><p>D12</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI0MOSI</p>
+<p>UART3TX</p>
+<p>PWM2B</p>
+<p>T4I</p>
+<p>T4O</p>
+<p>LCD_SEG30</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>17</p></td>
+<td><p>B0</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI1MOSI</p>
+<p>UART3TX</p>
+<p>PWM2A</p>
+<p>T2I</p>
+<p>T2O</p>
+<p>LCD_SEG31</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>18</p></td>
+<td><p>B1</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI1MISO</p>
+<p>UART3RX</p>
+<p>PWM2B</p>
+<p>T1I</p>
+<p>T1O</p>
+<p>LED_SEG0</p>
+<p>LCD_SEG0</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>19</p></td>
+<td><p>B2</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SCL</p>
+<p>SPI0SCLK</p>
+<p>PWM3B</p>
+<p>T2I</p>
+<p>T2O</p>
+<p>LED_SEG1</p>
+<p>LCD_SEG1</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>20</p></td>
+<td><p>B3</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SDA</p>
+<p>I2C1SCL</p>
+<p>SPI0MISO</p>
+<p>UART2RX</p>
+<p>PWM3BN</p>
+<p>T3I</p>
+<p>T3O</p>
+<p>LED_SEG2</p>
+<p>LCD_SEG2</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>21</p></td>
+<td><p>B4</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C1SDA</p>
+<p>SPI0MOSI</p>
+<p>UART2TX</p>
+<p>CAN0TX</p>
+<p>PWM2BN</p>
+<p>T4I</p>
+<p>T4O</p>
+<p>LED_SEG3</p>
+<p>LCD_SEG3</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>22</p></td>
+<td><p>B5</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI1MOSI</p>
+<p>UART3TX</p>
+<p>CAN0RX</p>
+<p>PWM2AN</p>
+<p>T5I</p>
+<p>T5O</p>
+<p>LED_SEG4</p>
+<p>LCD_SEG4</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>23</p></td>
+<td><p>B6</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C1SDA</p>
+<p>SPI1MISO</p>
+<p>UART3RX</p>
+<p>T6I</p>
+<p>T6O</p>
+<p>LED_SEG5</p>
+<p>LCD_SEG5</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>24</p></td>
+<td><p>B7</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C1SCL</p>
+<p>SPI1SCLK</p>
+<p>T7I</p>
+<p>T7O</p>
+<p>LED_SEG6</p>
+<p>LCD_SEG6</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>32</p></td>
+<td><p>/</p></td>
+<td><p>B8</p></td>
+<td><p>I/O</p></td>
+<td><p>UART1TX</p>
+<p>LCD_SEG7</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>33</p></td>
+<td><p>25</p></td>
+<td><p>B9</p></td>
+<td><p>I/O</p></td>
+<td><p>UART1RX</p>
+<p>LED_SEG7</p>
+<p>LCD_SEG8</p>
+<p>ADC0_CH8</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>34</p></td>
+<td><p>/</p></td>
+<td><p>A7</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI1SSEL</p>
+<p>UART2RTS</p>
+<p>LED_SEG12</p>
+<p>LCD_SEG9</p>
+<p>ADC0_CH7</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>35</p></td>
+<td><p>/</p></td>
+<td><p>A8</p></td>
+<td><p>I/O</p></td>
+<td><p>UART2CTS</p>
+<p>LED_SEG13</p>
+<p>LCD_SEG10</p>
+<p>ADC0_CH6</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>36</p></td>
+<td><p>/</p></td>
+<td><p>A9</p></td>
+<td><p>I/O</p></td>
+<td><p>PWM0B</p>
+<p>LED_SEG14</p>
+<p>LCD_SEG11</p>
+<p>ADC0_CH5</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>37</p></td>
+<td><p>26</p></td>
+<td><p>A10</p></td>
+<td><p>I/O</p></td>
+<td><p>SWCLK</p>
+<p>T7I</p>
+<p>T7O</p>
+<p>LED_SEG15</p>
+<p>LCD_SEG12</p>
+<p>ADC0_CH4</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>38</p></td>
+<td><p>27</p></td>
+<td><p>A11</p></td>
+<td><p>I/O</p></td>
+<td><p>SWDIO</p>
+<p>PWM3A</p>
+<p>LED_SEG16</p>
+<p>LCD_SEG13</p>
+<p>ADC0_CH3</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>39</p></td>
+<td><p>/</p></td>
+<td><p>A12</p></td>
+<td><p>I/O</p></td>
+<td><p>T6I</p>
+<p>T6O</p>
+<p>LCD_SEG14</p>
+<p>ADC0_CH2</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>40</p></td>
+<td><p>28</p></td>
+<td><p>A13</p></td>
+<td><p>I/O</p></td>
+<td><p>PWM3B</p>
+<p>ADC0_CH1</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>41</p></td>
+<td><p>29</p></td>
+<td><p>A14</p></td>
+<td><p>I/O</p></td>
+<td><p>SPI0CLK</p>
+<p>PWM3AN</p>
+<p>ADC0_CH0</p>
+<p>ADC0_REFP</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>/</p></td>
+<td><p>/</p></td>
+<td><p>A15</p></td>
+<td><p>I/O</p></td>
+<td><p>PWM3BN</p></td>
+</tr>
+<tr class="row-even"><td><p>42</p></td>
+<td><p>30</p></td>
+<td><p>D13</p></td>
+<td></td>
+<td><p>I2C0SDA</p>
+<p>SPI0MISO</p>
+<p>UART0RX</p>
+<p>T0O</p>
+<p>LED_SEG8</p>
+<p>LCD_SEG15</p>
+<p>ADC0_CH9</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>43</p></td>
+<td><p>31</p></td>
+<td><p>D14</p></td>
+<td></td>
+<td><p>SPI0MOSI</p>
+<p>UART0TX</p>
+<p>PWM1BN</p>
+<p>T0I</p>
+<p>LED_SEG9</p>
+<p>LCD_SEG16</p>
+<p>ADC0_CH10</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>44</p></td>
+<td><p>32</p></td>
+<td><p>A3</p></td>
+<td><p>I/O</p></td>
+<td><p>I2C0SCL</p>
+<p>SPI1SSEL</p>
+<p>PWM1A</p>
+<p>T2I</p>
+<p>T2O</p>
+<p>LED_SEG11</p>
+<p>LCD_SEG18</p>
+<p>ADC0_CH11</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><em>注1：I=输入，O=输出，S=电源</em></p>
+<p><em>注2：LED_COMx（x=0, …, 7）集成大电流SINK能力</em></p>
+</section>
+<section id="id3">
+<h2>功能描述<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>管脚名称</p></td>
+<td><p>描述</p></td>
+</tr>
+<tr class="row-even"><td><p>I2CxSCL</p></td>
+<td><p>I2Cx模块时钟引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>I2CxSDA</p></td>
+<td><p>I2Cx模块数据引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>SPIxSSEL</p></td>
+<td><p>SPIx模块片选引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPIxCLK</p></td>
+<td><p>SPIx模块时钟引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>SPIxMISO</p></td>
+<td><p>SPIx模块主机接收引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPIxMOSI</p></td>
+<td><p>SPIx模块主机发送引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>UARTxRX</p></td>
+<td><p>UARTx模块数据接收引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>UARTxTX</p></td>
+<td><p>UARTx模块数据发送引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>UARTxCTS</p></td>
+<td><p>UARTx模块发送允许引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>UARTxRTS</p></td>
+<td><p>UARTx模块接收请求引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>CANxRX</p></td>
+<td><p>CANx模块接收引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>CANxTX</p></td>
+<td><p>CANx模块发送引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>PWMxA</p></td>
+<td><p>PWM模块第x组A路输出引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>PWMxB</p></td>
+<td><p>PWM模块第x组B路输出引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>PWMxAN</p></td>
+<td><p>PWM模块第x组A路反向输出引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>PWMxBN</p></td>
+<td><p>PWM模块第x组B路反向输出引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>PWM_CLKx</p></td>
+<td><p>PWM PULSE引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>PWMxBRK</p></td>
+<td><p>PWMx模块的BRAKE输出引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>TxI</p></td>
+<td><p>TIMERx模块输入捕获引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>TxO</p></td>
+<td><p>TIMERx模块输出捕获引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>HALLx</p></td>
+<td><p>霍尔模块输入引脚x</p></td>
+</tr>
+<tr class="row-odd"><td><p>LED_COMx</p></td>
+<td><p>LED模块COM引脚x</p></td>
+</tr>
+<tr class="row-even"><td><p>LED_SEGx</p></td>
+<td><p>LED模块SEG引脚x</p></td>
+</tr>
+<tr class="row-odd"><td><p>LCD_COMx</p></td>
+<td><p>LCD模块COM引脚x</p></td>
+</tr>
+<tr class="row-even"><td><p>LCD_SEGx</p></td>
+<td><p>LCD模块SEG引脚x</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADC0_CHx</p></td>
+<td><p>ADC0模块通道x输入引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>ADC0_REFP</p></td>
+<td><p>ADC0 REFP基准正向输入引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>ISP</p></td>
+<td><p>ISP功能引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>RESETn</p></td>
+<td><p>芯片复位功能引脚，低电平复位</p></td>
+</tr>
+<tr class="row-odd"><td><p>RTC_1HZ</p></td>
+<td><p>RTC 1Hz 输出引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>XLI</p></td>
+<td><p>外部低频晶振输入引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>XLO</p></td>
+<td><p>外部低频晶振输出引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>XI</p></td>
+<td><p>外部高频晶振输入引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>XO</p></td>
+<td><p>外部高频晶振输出引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>CAP</p></td>
+<td><p>LDO电容引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>VSS</p></td>
+<td><p>芯片电源地引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>VDD</p></td>
+<td><p>芯片电源引脚</p></td>
+</tr>
+<tr class="row-odd"><td><p>SWCLK</p></td>
+<td><p>下载器SWCLK引脚</p></td>
+</tr>
+<tr class="row-even"><td><p>SWDIO</p></td>
+<td><p>下载器SWDIO引脚</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h2>管脚复用功能<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>PORTA管脚功能通过PORTCON模块的PORTA_FUNC0和PORTA_FUNC1寄存器对应位域配置。请使用驱动库提供的PORT_Init函数和功能宏定义配置管脚功能，提高代码可读性。</p>
+<p>表格 5‑1 PORTA复用功能表</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>管脚</p></td>
+<td><p>功能0</p></td>
+<td><p>功能1</p></td>
+<td><p>功能2</p></td>
+<td><p>功能3</p></td>
+<td><p>功能4</p></td>
+<td><p>功能5</p></td>
+<td><p>功能6</p></td>
+<td><p>功能7</p></td>
+<td><p>功能8</p></td>
+<td><p>功能15</p></td>
+<td><p>其他</p></td>
+</tr>
+<tr class="row-even"><td><p>PA0</p></td>
+<td><p>A0</p></td>
+<td><p>SPI0CS</p></td>
+<td><p>UART1RX</p></td>
+<td><p>HALL2</p></td>
+<td><p>LED_COM4</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PA1</p></td>
+<td><p>A1</p></td>
+<td><p>I2C1SCL</p></td>
+<td><p>SPI0CLK</p></td>
+<td><p>PWMBRK1</p></td>
+<td><p>LED_COM5</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PA2</p></td>
+<td><p>A2</p></td>
+<td><p>I2C1SDA</p></td>
+<td><p>SPI0MISO</p></td>
+<td><p>UART2TX</p></td>
+<td><p>LED_COM6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PA3</p></td>
+<td><p>A3/ADC0_CH11</p></td>
+<td><p>I2C0SCL</p></td>
+<td><p>SPI1SSEL</p></td>
+<td><p>PWM1A</p></td>
+<td><p>T2I</p></td>
+<td><p>T2O</p></td>
+<td><p>LED_SEG11</p></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG18</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PA4</p></td>
+<td><p>A4</p></td>
+<td><p>UART0TX</p></td>
+<td><p>PWM1AN</p></td>
+<td><p>T7I</p></td>
+<td><p>T7O</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG19</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PA5</p></td>
+<td><p>A5</p></td>
+<td><p>UART0RX</p></td>
+<td><p>UART0TX</p></td>
+<td><p>PWM0BN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>——</p></td>
+<td><p>ISP</p></td>
+</tr>
+<tr class="row-even"><td><p>PA6</p></td>
+<td><p>A6</p></td>
+<td><p>PWM_CLK0</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG20</p></td>
+<td><p>XLI</p></td>
+</tr>
+<tr class="row-odd"><td><p>PA7</p></td>
+<td><p>A7/ADC0_CH7</p></td>
+<td><p>SPI1SSEL</p></td>
+<td><p>UART2RTS</p></td>
+<td><p>LED_SEG12</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG9</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PA8</p></td>
+<td><p>A8/ADC0_CH6</p></td>
+<td><p>UART2CTS</p></td>
+<td><p>LED_SEG13</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG10</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PA9</p></td>
+<td><p>A9/ADC0_CH5</p></td>
+<td><p>PWM0B</p></td>
+<td><p>LED_SEG14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PA10</p></td>
+<td><p>A10/ADC0_CH4</p></td>
+<td><p>SWCLK</p></td>
+<td><p>T7I</p></td>
+<td><p>T7O</p></td>
+<td><p>LED_SEG15</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG12</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PA11</p></td>
+<td><p>A11/ADC0_CH3</p></td>
+<td><p>SWDIO</p></td>
+<td><p>PWM3A</p></td>
+<td><p>LED_SEG16</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG13</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PA12</p></td>
+<td><p>A12/ADC0_CH2</p></td>
+<td><p>T6I</p></td>
+<td><p>T6O</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG14</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PA13</p></td>
+<td><p>A13/ADC0_CH1</p></td>
+<td><p>PWM3B</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PA14</p></td>
+<td><p>A14/ADC0_CH0/ADC0_REFP</p></td>
+<td><p>SPI0CLK</p></td>
+<td><p>PWM3AN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PA15</p></td>
+<td><p>A15</p></td>
+<td><p>PWM3BN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><em>注：PA15专用于SLCD模块电源域控制，使用SLCD时需要设置为输出高电平为SLCD供电，不使用SLCD时设置为输出低电平。</em></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>PORTB管脚功能通过PORTCON模块的PORTB_FUNC0和PORTB_FUNC1寄存器对应位域配置。请使用驱动库提供的PORT_Init函数和功能宏定义配置管脚功能，提高代码可读性。</p>
+<p>表格 5‑2 PORTB复用功能</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>管脚</p></td>
+<td><p>功能0</p></td>
+<td><p>功能1</p></td>
+<td><p>功能2</p></td>
+<td><p>功能3</p></td>
+<td><p>功能4</p></td>
+<td><p>功能5</p></td>
+<td><p>功能6</p></td>
+<td><p>功能7</p></td>
+<td><p>功能8</p></td>
+<td><p>功能15</p></td>
+<td><p>其他</p></td>
+</tr>
+<tr class="row-even"><td><p>PB0</p></td>
+<td><p>B0</p></td>
+<td><p>SPI1MOSI</p></td>
+<td><p>UART3TX</p></td>
+<td><p>PWM2A</p></td>
+<td><p>T2I</p></td>
+<td><p>T2O</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG31</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PB1</p></td>
+<td><p>B1</p></td>
+<td><p>SPI1MISO</p></td>
+<td><p>UART3RX</p></td>
+<td><p>PWM2B</p></td>
+<td><p>T1I</p></td>
+<td><p>T1O</p></td>
+<td><p>LED_SEG0</p></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PB2</p></td>
+<td><p>B2</p></td>
+<td><p>I2C0SCL</p></td>
+<td><p>SPI0CLK</p></td>
+<td><p>PWM3B</p></td>
+<td><p>T2I</p></td>
+<td><p>T2O</p></td>
+<td><p>LED_SEG1</p></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG1</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PB3</p></td>
+<td><p>B3</p></td>
+<td><p>I2C0SDA</p></td>
+<td><p>I2C0SCL</p></td>
+<td><p>SPI0MISO</p></td>
+<td><p>UART2RX</p></td>
+<td><p>PWM3BN</p></td>
+<td><p>T3I</p></td>
+<td><p>T3O</p></td>
+<td><p>LED_SEG2</p></td>
+<td><p>LCD_SEG2</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PB4</p></td>
+<td><p>B4</p></td>
+<td><p>I2C1SDA</p></td>
+<td><p>SPI0MOSI</p></td>
+<td><p>UART2TX</p></td>
+<td><p>CAN0TX</p></td>
+<td><p>PWM2BN</p></td>
+<td><p>T4I</p></td>
+<td><p>T4O</p></td>
+<td><p>LED_SEG3</p></td>
+<td><p>LCD_SEG3</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PB5</p></td>
+<td><p>B5</p></td>
+<td></td>
+<td><p>SPI1MOSI</p></td>
+<td><p>UART3TX</p></td>
+<td><p>CAN0RX</p></td>
+<td><p>PWM2AN</p></td>
+<td><p>T5I</p></td>
+<td><p>T5O</p></td>
+<td><p>LED_SEG4</p></td>
+<td><p>LCD_SEG4</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PB6</p></td>
+<td><p>B6</p></td>
+<td></td>
+<td><p>I2C1SDA</p></td>
+<td><p>SPI1MISO</p></td>
+<td><p>UART3RX</p></td>
+<td><p>T6I</p></td>
+<td><p>T6O</p></td>
+<td><p>LED_SEG5</p></td>
+<td></td>
+<td><p>LCD_SEG5</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PB7</p></td>
+<td><p>B7</p></td>
+<td><p>I2C1SCL</p></td>
+<td><p>SPI1CLK</p></td>
+<td><p>T7I</p></td>
+<td><p>T7O</p></td>
+<td><p>LED_SEG6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG6</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PB8</p></td>
+<td><p>B8</p></td>
+<td><p>UART1TX</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG7</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PB9</p></td>
+<td><p>B9/ADC0_CH8</p></td>
+<td><p>UART1RX</p></td>
+<td><p>LED_SEG7</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG8</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PB10</p></td>
+<td><p>B10</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PB11</p></td>
+<td><p>B11</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PB12</p></td>
+<td><p>B12</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PB13</p></td>
+<td><p>B13</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PB14</p></td>
+<td><p>B14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PB15</p></td>
+<td><p>B15</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>PORTC管脚功能通过PORTCON模块的PORTC_FUNC0和PORTC_FUNC1寄存器对应位域配置。请使用驱动库提供的PORT_Init函数和功能宏定义配置管脚功能，提高代码可读性。</p>
+<p>表格 5‑3 PORTC复用功能</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>管脚</p></td>
+<td><p>功能0</p></td>
+<td><p>功能1</p></td>
+<td><p>功能2</p></td>
+<td><p>功能3</p></td>
+<td><p>功能4</p></td>
+<td><p>功能5</p></td>
+<td><p>功能6</p></td>
+<td><p>功能7</p></td>
+<td><p>功能8</p></td>
+<td><p>功能15</p></td>
+<td><p>其他</p></td>
+</tr>
+<tr class="row-even"><td><p>PC0</p></td>
+<td><p>C0</p></td>
+<td><p>SPI0MOSI</p></td>
+<td><p>UART2RX</p></td>
+<td><p>PWM2BN</p></td>
+<td><p>LED_COM7</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG24</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PC1</p></td>
+<td><p>C1</p></td>
+<td><p>SPI1MOSI</p></td>
+<td><p>PWM2B</p></td>
+<td><p>T5O</p></td>
+<td><p>LED_SEG17</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG25</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PC2</p></td>
+<td><p>C2</p></td>
+<td><p>I2C0SDA</p></td>
+<td><p>SPI1MISO</p></td>
+<td><p>T5I</p></td>
+<td><p>LED_SEG18</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG26</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PC3</p></td>
+<td><p>C3</p></td>
+<td><p>I2C0SCL</p></td>
+<td><p>SPI1CLK</p></td>
+<td><p>PWM2AN</p></td>
+<td><p>T1I</p></td>
+<td><p>T1O</p></td>
+<td><p>LED_SEG19</p></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG27</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PC4</p></td>
+<td><p>C4</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PC5</p></td>
+<td><p>C5</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PC6</p></td>
+<td><p>C6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PC7</p></td>
+<td><p>C7</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PC8</p></td>
+<td><p>C8</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PC9</p></td>
+<td><p>C9</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PC10</p></td>
+<td><p>C10</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PC11</p></td>
+<td><p>C11</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PC12</p></td>
+<td><p>C12</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PC13</p></td>
+<td><p>C13</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PC14</p></td>
+<td><p>C14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PC15</p></td>
+<td><p>C15</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>PORTD管脚功能通过PORTCON模块的PORTD_FUNC0和PORTD_FUNC1寄存器对应位域配置。请使用驱动库提供的PORT_Init函数和功能宏定义配置管脚功能，提高代码可读性。</p>
+<p>表格 5‑4 PORTD复用功能</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+<col style="width: 8%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>管脚</p></td>
+<td><p>功能0</p></td>
+<td><p>功能1</p></td>
+<td><p>功能2</p></td>
+<td><p>功能3</p></td>
+<td><p>功能4</p></td>
+<td><p>功能5</p></td>
+<td><p>功能6</p></td>
+<td><p>功能7</p></td>
+<td><p>功能8</p></td>
+<td><p>功能15</p></td>
+<td><p>其他</p></td>
+</tr>
+<tr class="row-even"><td><p>PD0</p></td>
+<td><p>D0</p></td>
+<td><p>UART0RTS</p></td>
+<td><p>PWM0AN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG21</p></td>
+<td><p>XLO</p></td>
+</tr>
+<tr class="row-odd"><td><p>PD1</p></td>
+<td><p>D1</p></td>
+<td><p>UART0CTS</p></td>
+<td><p>PWM0A</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG22</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PD2</p></td>
+<td><p>D2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>XI</p></td>
+</tr>
+<tr class="row-odd"><td><p>PD3</p></td>
+<td><p>D3</p></td>
+<td><p>PWM_CLK1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>XO</p></td>
+</tr>
+<tr class="row-even"><td><p>PD4</p></td>
+<td><p>D4</p></td>
+<td><p>I2C0SCL</p></td>
+<td><p>HALL1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG23</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PD5</p></td>
+<td><p>D5</p></td>
+<td><p>I2C0SDA</p></td>
+<td><p>HALL2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_COM0</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PD6</p></td>
+<td><p>D6</p></td>
+<td><p>I2C0SCL</p></td>
+<td><p>UART1RTS</p></td>
+<td><p>CAN0TX</p></td>
+<td><p>PWMBRK0</p></td>
+<td><p>HALL0</p></td>
+<td><p>LED_COM0</p></td>
+<td></td>
+<td></td>
+<td><p>LCD_COM1</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PD7</p></td>
+<td><p>D7</p></td>
+<td><p>I2C0SDA</p></td>
+<td><p>UART1CTS</p></td>
+<td><p>CAN0RX</p></td>
+<td><p>PWM2AN</p></td>
+<td><p>LED_COM1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_COM2</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PD8</p></td>
+<td><p>D8</p></td>
+<td><p>PWM2A</p></td>
+<td><p>HALL0</p></td>
+<td><p>T3I</p></td>
+<td><p>T3O</p></td>
+<td><p>LED_COM2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_COM3</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PD9</p></td>
+<td><p>D9</p></td>
+<td><p>UART1TX</p></td>
+<td><p>HALL1</p></td>
+<td><p>T3I</p></td>
+<td><p>T3O</p></td>
+<td><p>LED_COM3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>——</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PD10</p></td>
+<td><p>D10</p></td>
+<td><p>I2C1SCL</p></td>
+<td><p>SPI0CLK</p></td>
+<td><p>PWM2B</p></td>
+<td><p>RTC_1HZ</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG28</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PD11</p></td>
+<td><p>D11</p></td>
+<td><p>I2C1SDA</p></td>
+<td><p>SPI0MISO</p></td>
+<td><p>UART3RX</p></td>
+<td><p>PWM2A</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG29</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PD12</p></td>
+<td><p>D12</p></td>
+<td><p>SPI0MOSI</p></td>
+<td><p>UART3TX</p></td>
+<td><p>PWM2B</p></td>
+<td><p>T4I</p></td>
+<td><p>T4O</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG30</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PD13</p></td>
+<td><p>D13/ADC0 _CH9</p></td>
+<td><p>I2C0SDA</p></td>
+<td><p>SPI0MISO</p></td>
+<td><p>UART0RX</p></td>
+<td><p>T0O</p></td>
+<td><p>LED_SEG8</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG15</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PD14</p></td>
+<td><p>D14/ADC0_CH10</p></td>
+<td><p>SPI0MOSI</p></td>
+<td><p>UART0TX</p></td>
+<td><p>PWM1BN</p></td>
+<td><p>T0I</p></td>
+<td></td>
+<td><p>LED_SEG9</p></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG16</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PD15</p></td>
+<td><p>D15</p></td>
+<td><p>SPI0SSEL</p></td>
+<td><p>PWM1B</p></td>
+<td><p>T0I</p></td>
+<td><p>T0O</p></td>
+<td><p>LED_SEG10</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LCD_SEG17</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="%E5%8A%9F%E8%83%BD%E6%96%B9%E6%A1%86%E5%9B%BE.html" class="btn btn-neutral float-left" title="功能方框图" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="%E5%8A%9F%E8%83%BD%E6%8F%8F%E8%BF%B0/index.html" class="btn btn-neutral float-right" title="功能描述" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, synwit.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

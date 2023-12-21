@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="**zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电气特性 &mdash; SWM241数据手册 v1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="封装尺寸" href="%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8.html" />
+    <link rel="prev" title="典型应用电路" href="%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E7%94%B5%E8%B7%AF.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            SWM241数据手册
+              <img src="../_static/logo.ico" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/index.html">相关文档</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%A6%82%E8%BF%B0.html">概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%89%B9%E6%80%A7.html"><strong>特性</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97.html"><strong>选型指南</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8A%9F%E8%83%BD%E6%96%B9%E6%A1%86%E5%9B%BE.html">功能方框图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%AE%A1%E8%84%9A%E9%85%8D%E7%BD%AE.html"><strong>管脚配置</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8A%9F%E8%83%BD%E6%8F%8F%E8%BF%B0/index.html">功能描述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E7%94%B5%E8%B7%AF.html">典型应用电路</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">电气特性</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">绝对最大额定值</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">直流电气特性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">交流电气特性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rc">内部高频RC振荡器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">内部低频RC振荡器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mhz">外部2-32MHz晶体振荡器</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">模拟器件特性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#saradc">SARADC特性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ldo">LDO特性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brown-out-detector">欠压检测 (Brown-out Detector)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#power-on-reset">上电复位（Power-on Reset）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vdd">上电VDD上升率要求</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flash-dc">FLASH DC电气特性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8.html">封装尺寸</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95.html">版本记录</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SWM241数据手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">电气特性</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/SWM241/电气特性.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>电气特性<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<p>本章提供了SWM241系列电气参数，包括额定值，DC参数及AC参数。</p>
+<section id="id2">
+<h2>绝对最大额定值<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>表格 8‑1绝对最大额定值</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>符号</p></td>
+<td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>最小值</p></td>
+<td><p>单位</p></td>
+</tr>
+<tr class="row-even"><td><p>Vdd-Vss</p></td>
+<td><p>直流电源电压</p></td>
+<td><p>6</p></td>
+<td><p>-0.3</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-odd"><td><p>T<sub>w</sub></p></td>
+<td><p>工作温度</p></td>
+<td><p>105</p></td>
+<td><p>-40</p></td>
+<td><p>℃</p></td>
+</tr>
+<tr class="row-even"><td><p>T<sub>S</sub></p></td>
+<td><p>贮存温度</p></td>
+<td><p>150</p></td>
+<td><p>-50</p></td>
+<td><p>℃   |</p></td>
+</tr>
+<tr class="row-odd"><td><p>I<sub>OL</sub></p></td>
+<td><p>单一管脚最大灌电流</p></td>
+<td><p>20</p></td>
+<td><p>—</p></td>
+<td><p>mA</p></td>
+</tr>
+<tr class="row-even"><td><p>I<sub>OH</sub></p></td>
+<td><p>单一管脚最大输出电流</p></td>
+<td><p>20</p></td>
+<td><p>—</p></td>
+<td><p>mA</p></td>
+</tr>
+<tr class="row-odd"><td><p>I<sub>LED</sub></p></td>
+<td><p>大驱动IO灌电流能力</p></td>
+<td><p>150</p></td>
+<td><p>—</p></td>
+<td><p>mA</p></td>
+</tr>
+<tr class="row-even"><td><p>ΣI<sub>OL</sub></p></td>
+<td><p>所有管脚输入电流和</p></td>
+<td><p>250</p></td>
+<td><p>—</p></td>
+<td><p>mA</p></td>
+</tr>
+<tr class="row-odd"><td><p>ΣI<sub>OH</sub></p></td>
+<td><p>所有管脚输出电流和</p></td>
+<td><p>120</p></td>
+<td><p>—</p></td>
+<td><p>mA</p></td>
+</tr>
+<tr class="row-even"><td><p>V<sub>ESD</sub></p></td>
+<td><p>静电保护 (HBM)</p></td>
+<td><p>8000</p></td>
+<td><p>—</p></td>
+<td><p>V</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">注意：</span> <span class="pre">绝对最大额定值是可能给器件带来物理性损伤或者影响稳定性的额定值，必须在不超过额定值的情况下使用此器件。</span></code></p>
+</section>
+<section id="id3">
+<h2>直流电气特性<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>表格 8‑2 直流电气特性(Vdd = 2.5V ~ 5.0V, Vss = 0V, T<sub>w</sub> =25℃))</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>符号</p></td>
+<td><p>单位</p></td>
+<td><p>测试条件</p></td>
+</tr>
+<tr class="row-even"><td><p>工作电压</p></td>
+<td><p>5.5</p></td>
+<td><p>5.0</p></td>
+<td><p>2.5</p></td>
+<td><p>Vdd</p></td>
+<td><p>V</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>模拟工作电压 |</p></td>
+<td><p>Vdd</p></td>
+<td><p>—</p></td>
+<td><p>0</p></td>
+<td><p>AVdd</p></td>
+<td><p>V</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>模拟参考电压</p></td>
+<td><p>—</p></td>
+<td><p>AVdd</p></td>
+<td><p>—</p></td>
+<td><p>Vref</p></td>
+<td><p>V</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>F<sub>sys</sub> =  48MHz 普通工作模式下电流</p></td>
+<td><p>—</p></td>
+<td><p>6.5</p></td>
+<td><p>—</p></td>
+<td><p>mA</p></td>
+<td><p>Idd1</p></td>
+<td><p>Vdd = 5V,所有引脚无负载，输入不使能，外设时钟关闭</p></td>
+</tr>
+<tr class="row-even"><td><p>F<sub>sys</sub> = 6MHz 普通工作模式下电流</p></td>
+<td><p>—</p></td>
+<td><p>2</p></td>
+<td><p>—</p></td>
+<td><p>mA</p></td>
+<td><p>Idd2</p></td>
+<td><p>Vdd = 5V, 所有引脚无负载，输入不使能，外设时钟关闭</p></td>
+</tr>
+<tr class="row-odd"><td><p>F<sub>sys</sub> =  32KHz 普通工作模式下电流</p></td>
+<td><p>—</p></td>
+<td><p>700</p></td>
+<td><p>—</p></td>
+<td><p>uA</p></td>
+<td><p>Idd3</p></td>
+<td><p>Vdd = 5V, 所有无负载，输入不使能，外设时钟关闭,</p>
+<blockquote>
+<div><p>内部高频振荡器关闭</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>SLEEP模式</p></td>
+<td><p>—</p></td>
+<td><p>25</p></td>
+<td><p>—</p></td>
+<td><p>uA</p></td>
+<td><p>Idd4</p></td>
+<td><p>Vdd = 5.0V</p></td>
+</tr>
+<tr class="row-odd"><td><p>输入低电压</p></td>
+<td><p>0.3Vdd</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>V</p></td>
+<td><p>VIL</p></td>
+<td><p>Input Enable</p></td>
+</tr>
+<tr class="row-even"><td><p>输入高电压</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>0.7Vdd</p></td>
+<td><p>V</p></td>
+<td><p>VIH</p></td>
+<td><p>Input Enable</p></td>
+</tr>
+<tr class="row-odd"><td><p>输出低电压(2.5V≤Vdd&lt;3.3V)</p></td>
+<td><p>0.4</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>V</p></td>
+<td><p>VOL</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>输出低电压(3.3V≤Vdd≤5V)</p></td>
+<td><p>0.6</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>V</p></td>
+<td><p>VOL</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>输出高电压(2.5V≤Vdd&lt;3.3V)</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>Vdd-0.4</p></td>
+<td><p>V</p></td>
+<td><p>VOH</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>输出高电压(3.3V≤Vdd≤5V)</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>Vdd-0.6</p></td>
+<td><p>V</p></td>
+<td><p>VOH</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>内置上拉电阻</p></td>
+<td></td>
+<td><p>TBD</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>内置下拉电阻</p></td>
+<td></td>
+<td><p>TBD</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h2>交流电气特性<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<section id="rc">
+<h3>内部高频RC振荡器<a class="headerlink" href="#rc" title="Permalink to this heading"></a></h3>
+<p>表格 8‑3内部高频RC振荡器特征值</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>单位</p></td>
+<td><p>条件</p></td>
+</tr>
+<tr class="row-even"><td><p>电压</p></td>
+<td><p>5.5</p></td>
+<td><p>5.0</p></td>
+<td><p>2.5</p></td>
+<td><p>V</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>中心频率</p></td>
+<td><p>—</p></td>
+<td><p>48</p></td>
+<td><p>—</p></td>
+<td><p>MHz</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>内部震荡矫正 T<sub>w</sub> = 25℃</p></td>
+<td><p>1</p></td>
+<td><p>—</p></td>
+<td><p>-1</p></td>
+<td><p>%</p></td>
+<td><p>Vdd = 5.0V</p></td>
+</tr>
+<tr class="row-odd"><td><p>内部震荡矫正 T<sub>w</sub> = -40℃~105℃</p></td>
+<td><p>3</p></td>
+<td><p>—</p></td>
+<td><p>-3</p></td>
+<td><p>%</p></td>
+<td><p>Vdd = 2.5V~5.5V</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id5">
+<h3>内部低频RC振荡器<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>表格 8‑4内部低频RC振荡器特征值</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>单位</p></td>
+<td><p>条件</p></td>
+</tr>
+<tr class="row-even"><td><p>电压</p></td>
+<td><p>5.5</p></td>
+<td><p>5.0</p></td>
+<td><p>2.5</p></td>
+<td><p>V</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>中心频率</p></td>
+<td><p>—</p></td>
+<td><p>32</p></td>
+<td><p>—</p></td>
+<td><p>kHz</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>频率误差</p></td>
+<td><p>20</p></td>
+<td><p>—</p></td>
+<td><p>-20</p></td>
+<td><p>%</p></td>
+<td><p>T<sub>w</sub> = -40℃~105℃, Vdd = 2.5V~5.5V</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mhz">
+<h3>外部2-32MHz晶体振荡器<a class="headerlink" href="#mhz" title="Permalink to this heading"></a></h3>
+<p>表格 8‑5外部2-32MHz晶体振荡器</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>单位</p></td>
+<td><p>条件</p></td>
+</tr>
+<tr class="row-even"><td><p>工作电压</p></td>
+<td><p>5.5</p></td>
+<td><p>—</p></td>
+<td><p>2.5</p></td>
+<td><p>V</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>温度</p></td>
+<td><p>105</p></td>
+<td><p>—</p></td>
+<td><p>-40</p></td>
+<td><p>℃</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>工作电流</p></td>
+<td><p>—</p></td>
+<td><p>TBD</p></td>
+<td><p>—</p></td>
+<td><p>mA</p></td>
+<td><p>12 MHz, VDD = 5.0V</p></td>
+</tr>
+<tr class="row-odd"><td><p>时钟频率</p></td>
+<td><p>32</p></td>
+<td><p>—</p></td>
+<td><p>2</p></td>
+<td><p>MHz</p></td>
+<td><p>—</p></td>
+</tr>
+</tbody>
+</table>
+<p>表格 8‑6外部振荡器典型电路</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>晶振频率</p></td>
+<td><p>C1</p></td>
+<td><p>C2</p></td>
+</tr>
+<tr class="row-even"><td><p>2MHz ~ 32 MHz</p></td>
+<td><p>10~20 pF</p></td>
+<td><p>10~20 pF</p></td>
+</tr>
+</tbody>
+</table>
+<img alt="" class="align-center" src="../_images/%E7%94%B5%E6%B0%94%E7%89%B9%E6%80%A7002.svg" /></section>
+</section>
+<section id="id6">
+<h2>模拟器件特性<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<section id="saradc">
+<h3>SARADC特性<a class="headerlink" href="#saradc" title="Permalink to this heading"></a></h3>
+<p>表格 8‑7 SAR ADC特征值</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>符号</p></td>
+<td><p>单位</p></td>
+</tr>
+<tr class="row-even"><td><p>分辨率</p></td>
+<td><p>12</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>bit</p></td>
+</tr>
+<tr class="row-odd"><td><p>工作电流（平均）</p></td>
+<td><p>—</p></td>
+<td><p>7</p></td>
+<td><p>—</p></td>
+<td><p>Idda</p></td>
+<td><p>mA</p></td>
+</tr>
+<tr class="row-even"><td><p>非线性差分误差</p></td>
+<td><p>TBD</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>DNL</p></td>
+<td><p>LSB</p></td>
+</tr>
+<tr class="row-odd"><td><p>非线性积分误差</p></td>
+<td><p>TBD</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>INL</p></td>
+<td><p>LSB</p></td>
+</tr>
+<tr class="row-even"><td><p>补偿错误</p></td>
+<td><p>—</p></td>
+<td><p>TBD</p></td>
+<td><p>—</p></td>
+<td><p>EO</p></td>
+<td><p>mV</p></td>
+</tr>
+<tr class="row-odd"><td><p>采样速率</p></td>
+<td><p>—</p></td>
+<td><p>1</p></td>
+<td><p>0.05</p></td>
+<td><p>FS</p></td>
+<td><p>MHz</p></td>
+</tr>
+<tr class="row-even"><td><p>工作时钟频率</p></td>
+<td><p>—</p></td>
+<td><p>1</p></td>
+<td><p>0.05</p></td>
+<td><p>FCLK</p></td>
+<td><p>MHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>采样延时</p></td>
+<td><p>—</p></td>
+<td><p>1</p></td>
+<td><p>—</p></td>
+<td><p>TADC</p></td>
+<td><p>Cycles</p></td>
+</tr>
+<tr class="row-even"><td><p>参考电压</p></td>
+<td><p>AVDD</p></td>
+<td><p>AVDD</p></td>
+<td><p>3.0</p></td>
+<td><p>VREFIN</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-odd"><td><p>电容值（每通道）</p></td>
+<td><p>TBD</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>pF</p></td>
+</tr>
+<tr class="row-even"><td><p>工作电压</p></td>
+<td><p>5.5</p></td>
+<td><p>5.0</p></td>
+<td><p>2.5</p></td>
+<td><p>AVdd</p></td>
+<td><p>V</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ldo">
+<h3>LDO特性<a class="headerlink" href="#ldo" title="Permalink to this heading"></a></h3>
+<p>表格 8‑8 LDO特征值</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>符号</p></td>
+<td><p>单位</p></td>
+</tr>
+<tr class="row-even"><td><p>工作电压</p></td>
+<td><p>5.5</p></td>
+<td><p>—</p></td>
+<td><p>2.5</p></td>
+<td><p>VDD</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-odd"><td><p>输出电压</p></td>
+<td><p>TBD</p></td>
+<td><p>1.55</p></td>
+<td><p>TBD</p></td>
+<td><p>VLDO</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-even"><td><p>工作温度范围</p></td>
+<td><p>105</p></td>
+<td><p>25</p></td>
+<td><p>-40</p></td>
+<td><p>TA</p></td>
+<td><p>℃</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="brown-out-detector">
+<h3>欠压检测 (Brown-out Detector)<a class="headerlink" href="#brown-out-detector" title="Permalink to this heading"></a></h3>
+<p>表格 8‑9 欠压检测特性</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>符号</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>单位</p></td>
+<td><p>测试条件</p></td>
+</tr>
+<tr class="row-even"><td><p>工作电压</p></td>
+<td><p>VDD</p></td>
+<td><p>5.5</p></td>
+<td><p>—</p></td>
+<td><p>1.55</p></td>
+<td><p>V</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-odd"><td><p>温度</p></td>
+<td><p>TA</p></td>
+<td><p>105</p></td>
+<td><p>25</p></td>
+<td><p>-40</p></td>
+<td><p>℃</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>静态电流</p></td>
+<td><p>IBOD</p></td>
+<td><p>TBD</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>μA</p></td>
+<td><p>VDD = 5V</p></td>
+</tr>
+<tr class="row-odd"><td><p>欠压复位阈值 RSTLVL = 000</p></td>
+<td><p>VBOD_RST</p></td>
+<td><p>TBD</p></td>
+<td><p>1.7</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>欠压复位阈值 RSTLVL = 001</p></td>
+<td><p>VBOD_RST</p></td>
+<td><p>TBD</p></td>
+<td><p>1.9</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>RSTLVL = 001</p></td>
+</tr>
+<tr class="row-odd"><td><p>欠压复位阈值 RSTLVL = 010</p></td>
+<td><p>VBOD_RST</p></td>
+<td><p>TBD</p></td>
+<td><p>2.1</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>RSTLVL = 010</p></td>
+</tr>
+<tr class="row-even"><td><p>欠压复位阈值 RSTLVL = 011</p></td>
+<td><p>VBOD_RST</p></td>
+<td><p>TBD</p></td>
+<td><p>2.7</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>RSTLVL = 011</p></td>
+</tr>
+<tr class="row-odd"><td><p>欠压复位阈值 RSTLVL = 100</p></td>
+<td><p>VBOD_RST</p></td>
+<td><p>TBD</p></td>
+<td><p>3.5</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>RSTLVL = 100</p></td>
+</tr>
+<tr class="row-even"><td><p>欠压中断阈值 INTLVL = 000</p></td>
+<td><p>VBOD_INT</p></td>
+<td><p>TBD</p></td>
+<td><p>1.9</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>INTLVL 00</p></td>
+</tr>
+<tr class="row-odd"><td><p>欠压中断阈值 INTLVL = 001</p></td>
+<td><p>VBOD_INT</p></td>
+<td><p>TBD</p></td>
+<td><p>2.1</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>INTLVL = 001</p></td>
+</tr>
+<tr class="row-even"><td><p>欠压中断阈值 INTLVL = 010</p></td>
+<td><p>VBOD_INT</p></td>
+<td><p>TBD</p></td>
+<td><p>2.3</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>INTLVL = 010</p></td>
+</tr>
+<tr class="row-odd"><td><p>欠压中断阈值 INTLVL = 011</p></td>
+<td><p>VBOD_INT</p></td>
+<td><p>TBD</p></td>
+<td><p>2.5</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>INTLVL = 011</p></td>
+</tr>
+<tr class="row-even"><td><p>欠压中断阈值 INTLVL = 100</p></td>
+<td><p>VBOD_INT</p></td>
+<td><p>TBD</p></td>
+<td><p>2.7</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>INTLVL = 100</p></td>
+</tr>
+<tr class="row-odd"><td><p>欠压中断阈值 INTLVL = 101</p></td>
+<td><p>VBOD_INT</p></td>
+<td><p>TBD</p></td>
+<td><p>3.5</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>INTLVL = 101</p></td>
+</tr>
+<tr class="row-even"><td><p>欠压中断阈值 INTLVL = 110</p></td>
+<td><p>VBOD_INT</p></td>
+<td><p>TBD</p></td>
+<td><p>4.1</p></td>
+<td><p>TBD</p></td>
+<td><p>V</p></td>
+<td><p>INTLVL = 110</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="power-on-reset">
+<h3>上电复位（Power-on Reset）<a class="headerlink" href="#power-on-reset" title="Permalink to this heading"></a></h3>
+<p>表格 8‑10 上电复位特性</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>符号</p></td>
+<td><p>单位</p></td>
+</tr>
+<tr class="row-even"><td><p>温度</p></td>
+<td><p>105</p></td>
+<td><p>25</p></td>
+<td><p>-40</p></td>
+<td><p>TA</p></td>
+<td><p>℃</p></td>
+</tr>
+<tr class="row-odd"><td><p>复位电压</p></td>
+<td><p>TBD</p></td>
+<td><p>1.6</p></td>
+<td><p>TBD</p></td>
+<td><p>VPOR</p></td>
+<td><p>V</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VDD起始电压来确保上电复位</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">200</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">—</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">—</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">VPOR</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mV</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>VDD上升率来确保上电复位</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>0.8</p></td>
+<td><p>RRVDD</p></td>
+<td><p>V/ms</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vdd">
+<h3>上电VDD上升率要求<a class="headerlink" href="#vdd" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>符号</p></td>
+<td><p>单位</p></td>
+</tr>
+<tr class="row-even"><td><p>电源供电上升时间</p></td>
+<td><p>2.0</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>ms</p></td>
+<td><p>Tr</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">注：当电源电压上升较慢时，需要通过reset引脚保证上电稳定性；或通过BOD复位保证上电稳定性，BOD复位为电平复位，内部默认一直开启，且对上电速度要求较低。</span></code></p>
+<p>上电</p>
+<img alt="上电" class="align-center" src="../_images/%E7%94%B5%E6%B0%94%E7%89%B9%E6%80%A7003.svg" /><p>图 8‑1 上电复位时间示意图</p>
+</section>
+<section id="flash-dc">
+<h3>FLASH DC电气特性<a class="headerlink" href="#flash-dc" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>参数</p></td>
+<td><p>最大值</p></td>
+<td><p>典型值</p></td>
+<td><p>最小值</p></td>
+<td><p>符号</p></td>
+<td><p>单位</p></td>
+</tr>
+<tr class="row-even"><td><p>擦写次数</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>20K</p></td>
+<td><p>N<sub>ENDUR</sub></p></td>
+<td><p>Cycles</p></td>
+</tr>
+<tr class="row-odd"><td><p>数据保留</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>100</p></td>
+<td><p>T<sub>RET</sub></p></td>
+<td><p>years</p></td>
+</tr>
+<tr class="row-even"><td><p>全片擦除时间</p></td>
+<td><p>—</p></td>
+<td><p>6</p></td>
+<td><p>—</p></td>
+<td><p>T<sub>CERASE</sub></p></td>
+<td><p>ms</p></td>
+</tr>
+<tr class="row-odd"><td><p>页擦除时间</p></td>
+<td><p>—</p></td>
+<td><p>1.5</p></td>
+<td><p>—</p></td>
+<td><p>T<sub>ERASE</sub></p></td>
+<td><p>ms</p></td>
+</tr>
+<tr class="row-even"><td><p>字编程时间</p></td>
+<td><p>—</p></td>
+<td><p>20</p></td>
+<td><p>—</p></td>
+<td><p>T<sub>PORG</sub></p></td>
+<td><p>us</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E7%94%B5%E8%B7%AF.html" class="btn btn-neutral float-left" title="典型应用电路" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8.html" class="btn btn-neutral float-right" title="封装尺寸" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, synwit.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

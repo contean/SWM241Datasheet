@@ -1,0 +1,3779 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="**zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>通用I/O （GPIO） &mdash; SWM241数据手册 v1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="加强型定时器（TIMER）" href="%E5%8A%A0%E5%BC%BA%E5%9E%8B%E5%AE%9A%E6%97%B6%E5%99%A8.html" />
+    <link rel="prev" title="PORTCON" href="PORTCON.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SWM241数据手册
+              <img src="../../_static/logo.ico" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/index.html">相关文档</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%A6%82%E8%BF%B0.html">概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%89%B9%E6%80%A7.html"><strong>特性</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97.html"><strong>选型指南</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%8A%9F%E8%83%BD%E6%96%B9%E6%A1%86%E5%9B%BE.html">功能方框图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%AE%A1%E8%84%9A%E9%85%8D%E7%BD%AE.html"><strong>管脚配置</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">功能描述</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="%E5%AD%98%E5%82%A8%E5%99%A8%E6%98%A0%E5%B0%84.html">存储器映射</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E5%99%A8.html">中断控制器（NVIC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86.html">系统管理（SYSCON）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PORTCON.html">PORTCON</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">通用I/O （GPIO）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">功能描述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">数据控制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">中断控制与清除</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">寄存器映射</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">寄存器描述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxodr">GPIOx写数据寄存器ODR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxdir">GPIOx方向寄存器DIR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxintlvltrg">GPIOx中断触发条件寄存器INTLVLTRG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxintbe">GPIOx中断沿触发配置寄存器INTBE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxintriseen">GPIOx中断触发极性寄存器INTRISEEN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxinten">GPIOx中断使能寄存器INTEN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxintrawstat">GPIOx原始中断状态寄存器INTRAWSTAT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxintstat">GPIOx中断状态寄存器INTSTAT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxintclr">GPIOx中断清除寄存器INTCLR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpio-dmadmaen">GPIO DMA触发使能寄存器DMAEN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpioxidr">GPIOx读数据寄存器IDR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpiox-pinndatapinx-x-0-15">GPIOx PINn数据寄存器DATAPINx(x = 0~15)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8A%A0%E5%BC%BA%E5%9E%8B%E5%AE%9A%E6%97%B6%E5%99%A8.html">加强型定时器（TIMER）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%9C%8B%E9%97%A8%E7%8B%97%E5%AE%9A%E6%97%B6%E5%99%A8.html">看门狗定时器（WDT）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%9E%E6%97%B6%E6%97%B6%E9%92%9F.html">实时时钟（RTC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UART%E6%8E%A5%E5%8F%A3%E6%8E%A7%E5%88%B6%E5%99%A8.html">UART接口控制器（UART）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="I2C%E6%80%BB%E7%BA%BF%E6%8E%A7%E5%88%B6%E5%99%A8.html">I2C总线控制器（I2C）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPI%E6%80%BB%E7%BA%BF%E6%8E%A7%E5%88%B6%E5%99%A8.html">SPI总线控制器（SPI）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%B1%80%E5%9F%9F%E7%BD%91%E6%8E%A7%E5%88%B6%E5%99%A8.html">局域网控制器（CAN）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%84%89%E5%86%B2%E5%AE%BD%E5%BA%A6%E8%B0%83%E5%88%B6.html">脉冲宽度调制（PWM）发生器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%A8%A1%E6%8B%9F%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2%E5%99%A8.html">模拟数字转换器（SAR ADC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98%E5%AD%98%E5%8F%96.html">直接内存存取（DMA）控制器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CRC%E8%AE%A1%E7%AE%97%E5%8D%95%E5%85%83.html">CRC计算单元（CRC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%99%A4%E6%B3%95%E5%99%A8.html">除法器（DIV）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SLED%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97.html">SLED控制模块（SLED）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SLCD%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97.html">SLCD控制模块（SLCD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAFETY%E6%A8%A1%E5%9D%97.html">SAFETY模块（SAFETY）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FLASH%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%8EISP%E6%93%8D%E4%BD%9C.html">FLASH控制器与ISP操作</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E7%94%B5%E8%B7%AF.html">典型应用电路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%94%B5%E6%B0%94%E7%89%B9%E6%80%A7.html">电气特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8.html">封装尺寸</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95.html">版本记录</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SWM241数据手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">功能描述</a></li>
+      <li class="breadcrumb-item active">通用I/O （GPIO）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/SWM241/功能描述/通用IO.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="i-o-gpio">
+<h1>通用I/O （GPIO）<a class="headerlink" href="#i-o-gpio" title="Permalink to this heading"></a></h1>
+<p>概述
+~~</p>
+<p>通用输入输出模块主要功能包括数据控制、中断控制功能。SWM241系列所有型号GPIO操作均相同。使用前需使能对应GPIO模块时钟。</p>
+<p>特性
+~~</p>
+<ul class="simple">
+<li><p>最高58个独立IO。</p></li>
+<li><p>每个IO均支持位带功能</p></li>
+<li><p>每个IO均可触发中断。</p></li>
+<li><p>中断触发条件可配置，支持电平触发/边沿触发。</p>
+<ul>
+<li><p>电平触发支持高电平/低电平</p></li>
+<li><p>边沿触发中断可配置为上升沿/下降沿/双边沿触发。</p></li>
+</ul>
+</li>
+<li><p>每个IO均支持上拉/下拉/推挽/开漏功能。</p></li>
+</ul>
+<section id="id1">
+<h2>功能描述<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<section id="id2">
+<h3>数据控制<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>除SWD引脚与ISP引脚外，所有引脚上电后默认状态均为GPIO浮空输入（DIR = 0）。SWD引脚可在加密章节进行修改，ISP引脚默认下拉使能，保证浮空状态不会进入ISP模式。PA15专用于SLCD电源域控制，使用SLCD时需要设置输出高电平，不使用SLCD时需要设置为输出低电平。</p>
+<p>GPIO方向寄存器（DIRx）用来将每个独立的管脚配置为输入模式或者输出模式：</p>
+<ul class="simple">
+<li><p>当数据方向设为0时，GPIO对应引脚配置为输入</p></li>
+</ul>
+<blockquote>
+<div><p>通过读取相应数据寄存器（IDRx）对应位或对应DATAPINx寄存器获取指定GPIO端口当前状态值</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>当数据方向设为1时，GPIO对应引脚配置为输出</p></li>
+</ul>
+<blockquote>
+<div><p>通过向对应端口数据寄存器（ODRx）对应位或对应DATAPINx寄存器写入值改变指定引脚输出，0输出低电平，1输出高电平。</p>
+</div></blockquote>
+</section>
+<section id="id3">
+<h3>中断控制与清除<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>可根据需求将GPIO端口对应引脚配置为中断模式，并通过相关寄存器配置中断极性及触发方式。触发方式分为边沿触发和电平触发两种模式。</p>
+<ul class="simple">
+<li><p>对于边沿触发中断，可以设置为上升沿触发，下降沿触发或双边沿触发。中断发生后，标志位具备保持特性，必须通过软件对中断标志位进行清除</p></li>
+<li><p>对于电平触发中断，当外部引脚输入为指定电平时，中断发生。当电平翻转后，中断信号消失，无需软件进行清除。使用电平触发中断，需保证外部信号源保持电平稳定，以便有效中断电平能被端口识别</p></li>
+</ul>
+<p>使用以下寄存器来对产生中断触发方式和极性进行定义：</p>
+<ul class="simple">
+<li><p>GPIO中断触发条件寄存器（INTLVLTRG），用于配置电平触发或边沿触发</p></li>
+<li><p>GPIO中断触发极性寄存器（INTRISEEN），用于配置电平或边沿触发极性</p></li>
+<li><p>GPIO中断边沿触发配置寄存器（INTBE），选择为边沿触发后，用于配置单边沿触发或双边沿触发</p></li>
+</ul>
+<p>通过GPIO中断使能寄存器（INTEN）可以使能或者禁止相应端口对应位中断，GPIO原始中断状态（INTRAWSTAUS）不受使能位影响。当产生中断时，可以在GPIO原始中断状态（RAWINTSTAUS）获取中断信号的状态。当中断使能寄存器（INTEN）对应位为1时，中断状态（INTSTAUS）寄存
+器可读取到对应中断信号，且中断信号会进入中断配置模块及NVIC模块，执行中断程序。</p>
+<p>通过写1到GPIO中断清除寄存器（INTCLR）指定位可以清除相应位中断。</p>
+</section>
+</section>
+<section id="id4">
+<h2>寄存器映射<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称   |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line">|
+|</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+</td>
+<td><p>描述                       | | | |</p></td>
+</tr>
+<tr class="row-even"><td><p>GPIOABASE：0 <a href="#id5"><span class="problematic" id="id6">|</span></a>x40040000GPIOBBASE：0 <a href="#id7"><span class="problematic" id="id8">|</span></a>x40040800GPIOCBASE：0 <a href="#id9"><span class="problematic" id="id10">|</span></a>x40041000GPIODBASE：0 <a href="#id11"><span class="problematic" id="id12">|</span></a>x40041800</p></td>
+<td><div class="line-block">
+<div class="line">|     |     |</div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>ODR</p></td>
+<td><p>0x00</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO写数据寄存器           |</p></td>
+</tr>
+<tr class="row-even"><td><p>DIR</p></td>
+<td><p>0x04</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO方向寄存器             |</p></td>
+</tr>
+<tr class="row-odd"><td><p>INTLVLTRG</p></td>
+<td><p>0x08</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO中断触发条件           |</p></td>
+</tr>
+<tr class="row-even"><td><p>INTBE</p></td>
+<td><p>0x0c</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO中断沿触发配置寄存器   |</p></td>
+</tr>
+<tr class="row-odd"><td><p>INTRISEEN</p></td>
+<td><p>0x10</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO 中断触发极性          |</p></td>
+</tr>
+<tr class="row-even"><td><p>INTEN</p></td>
+<td><p>0x14</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO中断使能               |</p></td>
+</tr>
+<tr class="row-odd"><td><p>INTRAWSTAT</p></td>
+<td><p>0x18</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO中断原始状态           |</p></td>
+</tr>
+<tr class="row-even"><td><p>INTSTAT</p></td>
+<td><p>0x1c</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO中断状态               |</p></td>
+</tr>
+<tr class="row-odd"><td><p>INTCLR</p></td>
+<td><p>0x20</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO中断清除               |</p></td>
+</tr>
+<tr class="row-even"><td><p>DMAEN</p></td>
+<td><p>0x24</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO DMA 使能              |</p></td>
+</tr>
+<tr class="row-odd"><td><p>IDR</p></td>
+<td><p>0x30</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO读数据寄存器           |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN0</p></td>
+<td><p>0x40</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN0数据寄存器        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATAPIN1</p></td>
+<td><p>0x44</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN1数据寄存器        |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN2</p></td>
+<td><p>0x48</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN2数据寄存器        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATAPIN3</p></td>
+<td><p>0x4c</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN3数据寄存器        |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN4</p></td>
+<td><p>0x50</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN4数据寄存器        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATAPIN5</p></td>
+<td><p>0x54</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN5数据寄存器        |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN6</p></td>
+<td><p>0x58</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN6数据寄存器        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATAPIN7</p></td>
+<td><p>0x5c</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN7数据寄存器        |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN8</p></td>
+<td><p>0x60</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN8数据寄存器        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATAPIN9</p></td>
+<td><p>0x64</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN9数据寄存器        |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN10</p></td>
+<td><p>0x68</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN10数据寄存器       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATAPIN11</p></td>
+<td><p>0x6c</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN11数据寄存器       |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN12</p></td>
+<td><p>0x70</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN12数据寄存器       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATAPIN13</p></td>
+<td><p>0x74</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN13数据寄存器       |</p></td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN14</p></td>
+<td><p>0x78</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN14数据寄存器       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATAPIN15</p></td>
+<td><p>0x7c</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>GPIO PIN15数据寄存器       |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id13">
+<h2>寄存器描述<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h2>
+<section id="gpioxodr">
+<h3>GPIOx写数据寄存器ODR<a class="headerlink" href="#gpioxodr" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id14"><span class="problematic" id="id15">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>ODR</p></td>
+<td><p>0x00</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO写数据寄存器           |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚数据写寄存器位                      |</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚数据写寄存器位                      |</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚数据写寄存器位                      |</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚数据写寄存器位                      |</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚数据写寄存器位                      |</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚数据写寄存器位                      |</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚数据写寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚数据写寄存器位                       |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxdir">
+<h3>GPIOx方向寄存器DIR<a class="headerlink" href="#gpioxdir" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id16"><span class="problematic" id="id17">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DIR</p></td>
+<td><p>0x04</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO方向寄存器             |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚方向寄存器位                        |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚方向寄存器位                        |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚方向寄存器位                        |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚方向寄存器位                        |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚方向寄存器位                        |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚方向寄存器位                        |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚方向寄存器位                         |</p>
+<p>1：输出                                     |</p>
+<p>0：输入                                     |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxintlvltrg">
+<h3>GPIOx中断触发条件寄存器INTLVLTRG<a class="headerlink" href="#gpioxintlvltrg" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id18"><span class="problematic" id="id19">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>INTLVLTRG</p></td>
+<td><p>0x08</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO中断触发方式           |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚中断敏感条件寄存器位                |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚中断敏感条件寄存器位                |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚中断敏感条件寄存器位                |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚中断敏感条件寄存器位                |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚中断敏感条件寄存器位                |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚中断敏感条件寄存器位                |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚中断敏感条件寄存器位                 |</p>
+<p>1：电平检测                                 |</p>
+<p>0：边沿检测                                 |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxintbe">
+<h3>GPIOx中断沿触发配置寄存器INTBE<a class="headerlink" href="#gpioxintbe" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id20"><span class="problematic" id="id21">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>INTBE</p></td>
+<td><p>0x0c</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIOx中断沿触发配置寄存器  |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚中断沿触发配置寄存器位              |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚中断沿触发配置寄存器位              |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚中断沿触发配置寄存器位              |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚中断沿触发配置寄存器位              |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚中断沿触发配置寄存器位              |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚中断沿触发配置寄存器位              |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚中断沿触发配置寄存器位               |</p>
+<p>1：相应位                                   | 沿触发中断，即上升沿和下降沿都会触发中断 |</p>
+<p>0：相应位为单边沿触发中断，                 | TRISEEN寄存器相应位确定是上升沿/下降沿触发 |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxintriseen">
+<h3>GPIOx中断触发极性寄存器INTRISEEN<a class="headerlink" href="#gpioxintriseen" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id22"><span class="problematic" id="id23">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>INTRISEEN</p></td>
+<td><p>0x10</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO 中断触发极性          |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚中断事件寄存器位                    |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚中断事件寄存器位                    |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚中断事件寄存器位                    |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚中断事件寄存器位                    |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚中断事件寄存器位                    |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚中断事件寄存器位                    |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚中断事件寄存器位                     |</p>
+<p>1：上升沿/高电平触发中断                    |</p>
+<p>0：下降沿/低电平触发中断                    |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxinten">
+<h3>GPIOx中断使能寄存器INTEN<a class="headerlink" href="#gpioxinten" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id24"><span class="problematic" id="id25">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>INTEN</p></td>
+<td><p>0x14</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO中断使能               |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚中断使能寄存器位                    |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚中断使能寄存器位                    |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚中断使能寄存器位                    |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚中断使能寄存器位                    |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚中断使能寄存器位                    |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚中断使能寄存器位                    |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚中断使能寄存器位                     |</p>
+<p>1：相应位为中断使能                         |</p>
+<p>0：相应位为中断禁止                         |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxintrawstat">
+<h3>GPIOx原始中断状态寄存器INTRAWSTAT<a class="headerlink" href="#gpioxintrawstat" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id26"><span class="problematic" id="id27">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>INTRAWSTAT</p></td>
+<td><p>0x18</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO中断原始状态           |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚原始中断状态寄存器位                |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚原始中断状态寄存器位                |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚原始中断状态寄存器位                |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚原始中断状态寄存器位                |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚原始中断状态寄存器位                |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚原始中断状态寄存器位                |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚原始中断状态寄存器位                 |</p>
+<p>1：检测到中断触发条件(不受使能影响)         |</p>
+<p>0：没有检测到中断触发条件(不受使能影响)     |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxintstat">
+<h3>GPIOx中断状态寄存器INTSTAT<a class="headerlink" href="#gpioxintstat" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id28"><span class="problematic" id="id29">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>INTSTAT</p></td>
+<td><p>0x1c</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO中断状态               |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚中断状态寄存器位                    |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚中断状态寄存器位                    |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚中断状态寄存器位                    |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚中断状态寄存器位                    |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚中断状态寄存器位                    |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚中断状态寄存器位                    |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚中断状态寄存器位                     |</p>
+<p>1：检测到了中断                             |</p>
+<p>0：没有检测到中断                           |</p>
+<p>INTSTAT.PINx = INTRAWSTAT.PINx &amp; INTEN.PINx</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxintclr">
+<h3>GPIOx中断清除寄存器INTCLR<a class="headerlink" href="#gpioxintclr" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id30"><span class="problematic" id="id31">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>INTCLR</p></td>
+<td><p>0x20</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO中断清除               |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚中断清除寄存器位，写1清除中断       |</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚中断清除寄存器位，写1清除中断       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚中断清除寄存器位，写1清除中断       |</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚中断清除寄存器位，写1清除中断       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚中断清除寄存器位，写1清除中断       |</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚中断清除寄存器位，写1清除中断       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚中断清除寄存器位，写1清除中断        |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpio-dmadmaen">
+<h3>GPIO DMA触发使能寄存器DMAEN<a class="headerlink" href="#gpio-dmadmaen" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id32"><span class="problematic" id="id33">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DMAEN</p></td>
+<td><p>0x24</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO DMA使能寄存器         |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DMAEN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DMAEN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15:0</p></td>
+<td><p>DMAEN</p></td>
+<td><p>1：通过对应位的GPIO沿                       | 上升沿、下降沿、双沿）来触发DMA读取GPIO  | 数据寄存器                                  |</p>
+<p>0：CPU读取GPIODATA寄存器                    |</p>
+<p>注：沿状态通过INTBE和INTRISEEN寄存器来配置  |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpioxidr">
+<h3>GPIOx读数据寄存器IDR<a class="headerlink" href="#gpioxidr" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id34"><span class="problematic" id="id35">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>IDR</p></td>
+<td><p>0x30</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO读数据寄存器           |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN15</p></td>
+<td><p>PIN14</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>PIN7</p></td>
+<td><p>PIN6</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:16</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>PIN15</p></td>
+<td><p>Px15引脚数据读寄存器位                      |</p></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>PIN14</p></td>
+<td><p>Px14引脚数据读寄存器位                      |</p></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>PIN13</p></td>
+<td><p>Px13引脚数据读寄存器位                      |</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>PIN12</p></td>
+<td><p>Px12引脚数据读寄存器位                      |</p></td>
+</tr>
+<tr class="row-odd"><td><p>11</p></td>
+<td><p>PIN11</p></td>
+<td><p>Px11引脚数据读寄存器位                      |</p></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>PIN10</p></td>
+<td><p>Px10引脚数据读寄存器位                      |</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>PIN9</p></td>
+<td><p>Px9引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>PIN8</p></td>
+<td><p>Px8引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>PIN7</p></td>
+<td><p>Px7引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>PIN6</p></td>
+<td><p>Px6引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>PIN5</p></td>
+<td><p>Px5引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>PIN4</p></td>
+<td><p>Px4引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>PIN3</p></td>
+<td><p>Px3引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>PIN2</p></td>
+<td><p>Px2引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>PIN1</p></td>
+<td><p>Px1引脚数据读寄存器位                       |</p></td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>PIN0</p></td>
+<td><p>Px0引脚数据读寄存器位                       |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gpiox-pinndatapinx-x-0-15">
+<h3>GPIOx PINn数据寄存器DATAPINx(x = 0~15)<a class="headerlink" href="#gpiox-pinndatapinx-x-0-15" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id36"><span class="problematic" id="id37">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN0</p></td>
+<td><p>0x40</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN0数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id38"><span class="problematic" id="id39">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN1</p></td>
+<td><p>0x44</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN1数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id40"><span class="problematic" id="id41">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN2</p></td>
+<td><p>0x48</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN2数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id42"><span class="problematic" id="id43">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN3</p></td>
+<td><p>0x4C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN3数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id44"><span class="problematic" id="id45">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN4</p></td>
+<td><p>0x50</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN4数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id46"><span class="problematic" id="id47">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN5</p></td>
+<td><p>0x54</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN5数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id48"><span class="problematic" id="id49">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN6</p></td>
+<td><p>0x58</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN6数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id50"><span class="problematic" id="id51">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN7</p></td>
+<td><p>0x5C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN7数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id52"><span class="problematic" id="id53">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN8</p></td>
+<td><p>0x60</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN8数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id54"><span class="problematic" id="id55">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN9</p></td>
+<td><p>0x64</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN9数据寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id56"><span class="problematic" id="id57">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN10</p></td>
+<td><p>0x68</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN10数据寄存器       |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id58"><span class="problematic" id="id59">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN11</p></td>
+<td><p>0x6C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN11数据寄存器       |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id60"><span class="problematic" id="id61">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN12</p></td>
+<td><p>0x70</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN12数据寄存器       |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id62"><span class="problematic" id="id63">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN13</p></td>
+<td><p>0x74</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN13数据寄存器       |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id64"><span class="problematic" id="id65">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN14</p></td>
+<td><p>0x78</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN14数据寄存器       |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id66"><span class="problematic" id="id67">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DATAPIN15</p></td>
+<td><p>0x7C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>GPIO PIN15数据寄存器       |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>DA INi</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>DATAPINi</p></td>
+<td><p>GPIOx PINn数据寄存器。                      |</p>
+<p>读：GPIOx PINn的输入数据                    |</p>
+<p>写：GPIOx PINn的输出数据                    |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PORTCON.html" class="btn btn-neutral float-left" title="PORTCON" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="%E5%8A%A0%E5%BC%BA%E5%9E%8B%E5%AE%9A%E6%97%B6%E5%99%A8.html" class="btn btn-neutral float-right" title="加强型定时器（TIMER）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, synwit.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

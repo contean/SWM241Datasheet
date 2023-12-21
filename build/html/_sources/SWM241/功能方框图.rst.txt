@@ -1,0 +1,11 @@
+.. vim: syntax=rst
+
+功能方框图
+==============
+
+.. image:: ../SWM241/media/功能方框图002.svg
+   :align: center
+   :alt: 功能方框图
+
+图 4‑1 功能方框图
+

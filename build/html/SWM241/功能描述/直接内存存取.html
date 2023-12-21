@@ -1,0 +1,4659 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="**zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>直接内存存取（DMA）控制器 &mdash; SWM241数据手册 v1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CRC计算单元（CRC）" href="CRC%E8%AE%A1%E7%AE%97%E5%8D%95%E5%85%83.html" />
+    <link rel="prev" title="模拟数字转换器（SAR ADC）" href="%E6%A8%A1%E6%8B%9F%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2%E5%99%A8.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SWM241数据手册
+              <img src="../../_static/logo.ico" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../%E7%9B%B8%E5%85%B3%E6%96%87%E6%A1%A3/index.html">相关文档</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%A6%82%E8%BF%B0.html">概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%89%B9%E6%80%A7.html"><strong>特性</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%97.html"><strong>选型指南</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%8A%9F%E8%83%BD%E6%96%B9%E6%A1%86%E5%9B%BE.html">功能方框图</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%AE%A1%E8%84%9A%E9%85%8D%E7%BD%AE.html"><strong>管脚配置</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">功能描述</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="%E5%AD%98%E5%82%A8%E5%99%A8%E6%98%A0%E5%B0%84.html">存储器映射</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E5%99%A8.html">中断控制器（NVIC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86.html">系统管理（SYSCON）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PORTCON.html">PORTCON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%80%9A%E7%94%A8IO.html">通用I/O （GPIO）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8A%A0%E5%BC%BA%E5%9E%8B%E5%AE%9A%E6%97%B6%E5%99%A8.html">加强型定时器（TIMER）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%9C%8B%E9%97%A8%E7%8B%97%E5%AE%9A%E6%97%B6%E5%99%A8.html">看门狗定时器（WDT）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%9E%E6%97%B6%E6%97%B6%E9%92%9F.html">实时时钟（RTC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UART%E6%8E%A5%E5%8F%A3%E6%8E%A7%E5%88%B6%E5%99%A8.html">UART接口控制器（UART）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="I2C%E6%80%BB%E7%BA%BF%E6%8E%A7%E5%88%B6%E5%99%A8.html">I2C总线控制器（I2C）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SPI%E6%80%BB%E7%BA%BF%E6%8E%A7%E5%88%B6%E5%99%A8.html">SPI总线控制器（SPI）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%B1%80%E5%9F%9F%E7%BD%91%E6%8E%A7%E5%88%B6%E5%99%A8.html">局域网控制器（CAN）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%84%89%E5%86%B2%E5%AE%BD%E5%BA%A6%E8%B0%83%E5%88%B6.html">脉冲宽度调制（PWM）发生器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%A8%A1%E6%8B%9F%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2%E5%99%A8.html">模拟数字转换器（SAR ADC）</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">直接内存存取（DMA）控制器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">模块结构框图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">功能描述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">通道选择</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">模式选择</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">握手信号选择</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">启动方式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">中断处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">优先级配置</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">寄存器映射</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">寄存器描述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dmaen">DMA使能寄存器EN</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dmaie">DMA中断使能寄存器IE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dmaim">DMA中断屏蔽寄存器IM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dmaif">DMA中断状态寄存器IF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m0dstsgie">M0总线一侧传输完成中断使能寄存器DSTSGIE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m0dstsgim">M0总线一侧传输完成中断屏蔽寄存器DSTSGIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m0dstsgif">M0总线一侧传输完成中断状态寄存器DSTSGIF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m1srcsgie">M1总线一侧传输完成中断使能寄存器SRCSGIE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m1srcsgim">M1总线一侧传输完成中断屏蔽寄存器SRCSGIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m1srcsgif">M1总线一侧传输完成中断状态寄存器SRCSGIF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pri">通道优先设定寄存器PRI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ncrn">通道n控制寄存器CRn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#namn">通道n地址模式寄存器AMn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ndstn">通道n目的地址寄存器DSTn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#n1dstsgaddrn1">通道n目的分散收集地址1寄存器DSTSGADDRn1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#n2dstsgaddrn2">通道n目的分散收集地址2寄存器DSTSGADDRn2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ndstsgaddrn3">通道n目的分散收集地址寄存器DSTSGADDRn3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nmuxn">通道n握手信号选择寄存器MUXn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nsrcn">通道n源地址寄存器SRCn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#n1srcsgaddrn1">通道n源分散收集地址1寄存器SRCSGADDRn1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#n2srcsgaddrn2">通道n源分散收集地址2寄存器SRCSGADDRn2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#n3srcsgaddrn3">通道n源分散收集地址3寄存器SRCSGADDRn3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m0ndstsr">M0通道n状态寄存器DSTSR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#m1nsrcsr">M1通道n状态寄存器SRCSR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CRC%E8%AE%A1%E7%AE%97%E5%8D%95%E5%85%83.html">CRC计算单元（CRC）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%99%A4%E6%B3%95%E5%99%A8.html">除法器（DIV）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SLED%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97.html">SLED控制模块（SLED）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SLCD%E6%8E%A7%E5%88%B6%E6%A8%A1%E5%9D%97.html">SLCD控制模块（SLCD）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SAFETY%E6%A8%A1%E5%9D%97.html">SAFETY模块（SAFETY）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FLASH%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%8EISP%E6%93%8D%E4%BD%9C.html">FLASH控制器与ISP操作</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E7%94%B5%E8%B7%AF.html">典型应用电路</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%94%B5%E6%B0%94%E7%89%B9%E6%80%A7.html">电气特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%B0%81%E8%A3%85%E5%B0%BA%E5%AF%B8.html">封装尺寸</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95.html">版本记录</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SWM241数据手册</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">功能描述</a></li>
+      <li class="breadcrumb-item active">直接内存存取（DMA）控制器</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/SWM241/功能描述/直接内存存取.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dma">
+<h1>直接内存存取（DMA）控制器<a class="headerlink" href="#dma" title="Permalink to this heading"></a></h1>
+<p>概述
+~~</p>
+<p>SWM241系列所有型号DMA模块操作均相同，用来提供特定外设（UART、SPI、ADC）和存储器（SRAM）之间或总线地址和存储器（SRAM）之间的高速数据传输，无需CPU干涉，数据可以快速的通过DMA传输，从而节省了CPU的资源来做其他操作。</p>
+<p>DMA传输规则为按字传输，单次可传输字数多达4096Word。数据交换过程中，无需软件参与。</p>
+<p>本文中RX指MIU0到MIU1的数据搬移，TX指MIU1到MIU0的数据搬移。</p>
+<p>特性
+~~</p>
+<ul class="simple">
+<li><p>支持UART/SPI/ADC与SRAM间数据交互</p></li>
+<li><p>支持总线地址至SRAM间数据交互</p></li>
+<li><p>支持多种传输模式及数据单位</p></li>
+<li><p>支持TIMER触发使能</p></li>
+<li><p>支持三种地址变化方式：递增，固定，scatter gathe</p></li>
+<li><p>Master接口支持BYTE、HALFWORD和WORD操作</p></li>
+</ul>
+<section id="id1">
+<h2>模块结构框图<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>DMA模块结构如图 6‑58所示：</p>
+<p><img alt="直接内存存取002" src="SWM241/功能描述/media直接内存存取002.emf" /></p>
+<p>图 6‑58 DMA模块结构图</p>
+<p>SIU是AHB slave接口，MCU通过这个接口配置相关的控制寄存器，同时也完成和外设之间的握手。</p>
+<p>ARB0和ARB1用于仲裁各个通道的数据传输请求。</p>
+<p>HALFPLEXCH是单向传输通道，在任意时刻只能配置为发送或接收方向。</p>
+</section>
+<section id="id2">
+<h2>功能描述<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<section id="id3">
+<h3>通道选择<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>DMA共有2组2个通道，可同时传输2组不同方向数据。通道与模块对应关系如表格 6‑3所示：</p>
+<p>表格 6‑3 DMA各通道操作明细</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>M0通道      |</p></td>
+<td><p>对应外设     |    M</p></td>
+<td><p>通道      |    对应外</p></td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>CH0配置00   |</p></td>
+<td><p>UART0 TX     |</p></td>
+<td><p>CH0配置00   |</p></td>
+<td><p>UART1 RX     |</p></td>
+</tr>
+<tr class="row-odd"><td><p>CH0配置01   |</p></td>
+<td><p>SPI0 TX      |</p></td>
+<td><p>CH0配置01   |</p></td>
+<td><p>SPI1 RX      |</p></td>
+</tr>
+<tr class="row-even"><td><p>CH0配置02   |</p></td>
+<td><p>UART3 TX     |</p></td>
+<td><p>CH0配置02   |</p></td>
+<td><p>SARADC0      |</p></td>
+</tr>
+<tr class="row-odd"><td><p>CH0配置03   |</p></td>
+<td><ul>
+<li><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+</ul>
+</td>
+<td><p>CH0配置03   |</p></td>
+<td><p>UART2 RX     |</p></td>
+</tr>
+<tr class="row-even"><td><p>CH1配置00   |</p></td>
+<td><p>UART1 TX     |</p></td>
+<td><p>CH1配置00   |</p></td>
+<td><p>UART0 RX     |</p></td>
+</tr>
+<tr class="row-odd"><td><p>CH1配置01   |</p></td>
+<td><p>SPI1 TX      |</p></td>
+<td><p>CH1配置01   |</p></td>
+<td><p>SPI0 RX      |</p></td>
+</tr>
+<tr class="row-even"><td><p>CH1配置02   |</p></td>
+<td><p>UART2 TX     |</p></td>
+<td><p>CH1配置02   |</p></td>
+<td><p>SARADC0      |</p></td>
+</tr>
+<tr class="row-odd"><td><p>CH1配置03   |</p></td>
+<td><ul>
+<li><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</li>
+</ul>
+</td>
+<td><p>CH1配置03   |</p></td>
+<td><p>UART3 RX     |</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>注：在一个时间段内，同时使用的外设必须占用在不同的通道上，否则不能通过中断状态来区分哪个外设发生的事件</em>。</p>
+</section>
+<section id="id4">
+<h3>模式选择<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>支持三种地址变化方式：递增，固定，scatter gather。可通过配置AMn寄存器，分别配置源地址模式和目的地址模式，并可分别配置源和目的地址的位宽和传输模式。</p>
+<p><strong>递增</strong></p>
+<p>传输单位为字节时，从SRC指定地址+n处取数据（向DST指定地址+n处存数据）,n表示第n个数据</p>
+<p>传输单位为半字时，从SRC指定地址+2n处取数据（向DST指定地址+2n处存数据）,n表示第n个数据</p>
+<p>传输单位为 字 时，从SRC指定地址+4n处取数据（向DST指定地址+4n处存数据）,n表示第n个数据</p>
+<p><strong>固定</strong></p>
+<p>固定从SRC指定地址处取数据、固定向DST指定地址处存数据。</p>
+<p><strong>scatter</strong> <strong>gather</strong></p>
+<p>源地址模式：</p>
+<p>从SRCn开始，传输总长度1/4的数据；跳转到SRCSGADDRn1地址开始，再传输总长度1/4的数据；跳转到SRCSGADDRn2地址开始，再传输总长度1/4的数据；跳转到 SRCSGADDRn3地址开始，直到全部数据传输结束。</p>
+<p>以源地址模式为scatter gather为例，传输40个字过程如下：</p>
+<blockquote>
+<div><p>第一步、从SRCn指定地址处取10个字传输，</p>
+<p>第二步、从SRCSGADDRn1指定地址处取10个字传输</p>
+<p>第三步、从SRCSGADDRn2指定地址处取10个字传输</p>
+<p>第四步、从SRCSGADDRn3指定地址处取10个字传输</p>
+</div></blockquote>
+<p>目的地址模式：</p>
+<blockquote>
+<div><p>从DSTn0开始，传输总长度1/4的数据；跳转到DSTSGADDRn1地址开始，再传输总长度1/4的数据；跳转到DSTSGADDRn2地址开始，再传输总长度1/4的数据；跳转到DSTSGADDRn3地址开始，直到全部数据传输结束。</p>
+<p>以目的地址模式为scatter gather为例，传输40个字过程如下：</p>
+<p>第一步、向DSTn指定地址处存10个字传输，</p>
+<p>第二步、向DSTSGADDRn1指定地址处存10个字传输</p>
+<p>第三步、向DSTSGADDRn2指定地址处存10个字传输</p>
+<p>第四步、向DSTSGADDRn3指定地址处存10个字传输</p>
+</div></blockquote>
+<p>三种模式下DMA搬运40个字流程如图 6‑59所示：</p>
+<p><img alt="直接内存存取003" src="SWM241/功能描述/media直接内存存取003.emf" /></p>
+<p>图 6‑59 DMA搬运40个字流程图</p>
+</section>
+<section id="id5">
+<h3>握手信号选择<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>DMA通道可选择M1/M0总线上是否采用握手信号，可通过MUXn寄存器对应位来选择。</p>
+<p><strong>握手</strong></p>
+<p>需要通过握手信号进行信息交换</p>
+<p>DMA通道可通过握手信号进行信息交换，选择由哪个外设的硬件信号来控制源或目标外设之间的传输，具体外设可以通过MUXn寄存器对应位来选择。</p>
+<p>外设握手信号详情参考表格 6‑3。</p>
+<p>具体外设有SPI、UART、ADC，在一个时间段内，可同时使用多个外设，但同时使用的外设必须占用在不同的通道上，否则不能通过中断状态来区分哪个外设发生的事件。</p>
+<p><strong>非握手</strong></p>
+<p>非握手状态下所有的地址都可以搬运，可以任何地址到任何地址。</p>
+<p>握手、非握手传输示意图如图 6‑60所示：</p>
+<p><img alt="直接内存存取004" src="SWM241/功能描述/media直接内存存取004.emf" /></p>
+<p>图 6‑60 握手、非握手信号传输图</p>
+</section>
+<section id="id6">
+<h3>启动方式<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<p>DMA通道启动传输的方式有两种，一种为通过软件操作TXEN/RXEN位启动、一种为通过外部trigger信号启动，可通过配置MUXn寄存器来选择。</p>
+<p><strong>软件操作启动</strong></p>
+<p>软件操作可通过配置CRn寄存器中的TXEN活RXEN启动DMA传输。</p>
+<p><strong>外部trigger信号启动</strong></p>
+<p>外部trigger信号触发有TMER0~8，可通过配置MUXn寄存器选择使用哪个TIMER溢出信号触发、，且通道会等到外部trigger信号为高后才启动传输。</p>
+<p>配置如下：</p>
+<ul class="simple">
+<li><p>配置DMA模式，CRn寄存器相应位</p>
+<ul>
+<li><p>单次模式，传输完成后停止</p></li>
+<li><p>环形模式，传输完成后从头执行下一轮传输</p></li>
+</ul>
+</li>
+<li><p>配置源地址传输位宽，AMn寄存器相应位</p>
+<ul>
+<li><p>字节</p></li>
+<li><p>半字</p></li>
+<li><p>字</p></li>
+</ul>
+</li>
+<li><p>配置传输长度，CRn寄存器相应位</p></li>
+<li><p>配置源地址、目的地址，SRCn、DSTn寄存器</p></li>
+<li><p>配置源和目标地址模式，AMn寄存器相应位</p>
+<ul>
+<li><p>地址固定</p></li>
+<li><p>地址递增</p></li>
+<li><p>scatter gather</p></li>
+</ul>
+</li>
+<li><p>配置通道由trigger信号启动，MUXn相应位</p></li>
+<li><p>配置信号由哪个TIMER溢出信号触发，MUXn相应位</p></li>
+<li><p>初始化定时器</p></li>
+<li><p>启动定时器</p></li>
+</ul>
+<p>DMA启动方式如图 6‑61所示：</p>
+<p><img alt="直接内存存取005" src="SWM241/功能描述/media直接内存存取005.emf" /></p>
+<p>图 6‑61 DMA启动方式</p>
+</section>
+<section id="id7">
+<h3>中断处理<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<p>DMA控制器模块2个通道均支持传输结束中断。DMA初始化时如果配置了中断使能寄存器IE，当所配置通道传输完指定数据长度时会产生中断，此时中断状态寄存器IF对应位自动置1，对该位写1则清除中断，用户可通过读此寄存器来判断是否产生了中断。</p>
+<p>DMA各个通道还具备中断屏蔽功能。当配置了中断屏蔽寄存器IM时，即使数据传输结束，也不会产生中断。</p>
+</section>
+<section id="id8">
+<h3>优先级配置<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<p>可通过PRI寄存器来配置DMA各个通道的优先级。当多个通道同时请求传输时，先执行优先级高的。但当低优先级正在传输时，高优先级不会打断低优先级的传输。</p>
+</section>
+</section>
+<section id="id9">
+<h2>寄存器映射<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>名称   |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line">|
+|</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+</td>
+<td><p>描述                       | | | |</p></td>
+</tr>
+<tr class="row-even"><td><p>DMABASE：0 <a href="#id10"><span class="problematic" id="id11">|</span></a>x40000800</p></td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>EN</p></td>
+<td><p>0x00</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>使能寄存器                 |</p></td>
+</tr>
+<tr class="row-even"><td><p>IE</p></td>
+<td><p>0x04</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道中断使能               |</p></td>
+</tr>
+<tr class="row-odd"><td><p>IM</p></td>
+<td><p>0x08</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道中断屏蔽               |</p></td>
+</tr>
+<tr class="row-even"><td><p>IF</p></td>
+<td><p>0x0C</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道中断状态               |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DSTSGIE</p></td>
+<td><p>0x10</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>scatter gathe 0总线一侧传输完成中断使能 |</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGIM</p></td>
+<td><p>0x14</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>scatter gather M0总线一侧传输完成中断屏蔽 |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DSTSGIF</p></td>
+<td><p>0x18</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>scatter gathe 0总线一侧传输完成中断状态 |</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGIE</p></td>
+<td><p>0x1C</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>scatter gather M1总线一侧传输完成中断使能 |</p></td>
+</tr>
+<tr class="row-odd"><td><p>SRCSGIM</p></td>
+<td><p>0x20</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>scatter gather M1总线一侧传输完成中断屏蔽 |</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGIF</p></td>
+<td><p>0x24</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>scatter gathe 1总线一侧传输完成中断状态 |</p></td>
+</tr>
+<tr class="row-odd"><td><p>PRI</p></td>
+<td><p>0x3C</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道优先级设定             |</p></td>
+</tr>
+<tr class="row-even"><td><p>CRn</p></td>
+<td><p>0 x40*n +  0x00</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道控制                   |</p></td>
+</tr>
+<tr class="row-odd"><td><p>AMn</p></td>
+<td><p>0 x40*n +  0x04</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道地址模式               |</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTn</p></td>
+<td><p>0 x40*n +  0x08</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道n目的地址寄存器        |</p></td>
+</tr>
+<tr class="row-odd"><td><p>DSTSGADDRn1</p></td>
+<td><p>0 x40*n +  0xC</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>Destination Scatter Gather</p>
+<p>ress通道n目的分散收集地址1 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn2</p></td>
+<td><p>0 x40*n +  0x10</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>Destination Scatter Gather</p>
+<p>ress通道n目的分散收集地址2 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>DSTSGADDRn3</p></td>
+<td><p>0 x40*n +  0x24</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>Destination Scatter Gather</p>
+<p>ress通道n目的分散收集地址3 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>MUXn</p></td>
+<td><p>0 x40*n +  0x18</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道n握手信号选择寄存器    |</p></td>
+</tr>
+<tr class="row-odd"><td><p>SRCn</p></td>
+<td><p>0 x40*n +  0x1C</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>通道n源地址寄存器          |</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn1</p></td>
+<td><p>0 x40*n +  0x20</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>Source Scatter Gather</p>
+<p>ddress通道n源分散收集地址1 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>SRCSGADDRn2</p></td>
+<td><p>0 x40*n +  0x24</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>Source Scatter Gather</p>
+<p>ddress通道n源分散收集地址2 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn3</p></td>
+<td><p>0 x40*n +  0x28</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>Source Scatter Gather</p>
+<p>ddress通道n源分散收集地址3 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>DSTSR</p></td>
+<td><p>0 x40*n +  0x2C</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>M0通道n状态寄存器          |</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSR</p></td>
+<td><p>0 x40*n +  0x30</p></td>
+<td></td>
+<td><p>0x 00000</p></td>
+<td><p>M1通道n状态寄存器          |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id12">
+<h2>寄存器描述<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h2>
+<section id="dmaen">
+<h3>DMA使能寄存器EN<a class="headerlink" href="#dmaen" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id13"><span class="problematic" id="id14">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>EN</p></td>
+<td><p>0x00</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>使能寄存器                 |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>EN</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>EN</p></td>
+<td><p>DMA使能                                     |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dmaie">
+<h3>DMA中断使能寄存器IE<a class="headerlink" href="#dmaie" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id15"><span class="problematic" id="id16">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>IE</p></td>
+<td><p>0x04</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道中断使能               |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>CH0</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH1</p></td>
+<td><p>通道1传输完成中断使能                       |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0</p></td>
+<td><p>通道0传输完成中断使能                       |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dmaim">
+<h3>DMA中断屏蔽寄存器IM<a class="headerlink" href="#dmaim" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id17"><span class="problematic" id="id18">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>IM</p></td>
+<td><p>0x08</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道中断屏蔽               |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>CH0</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH1</p></td>
+<td><p>通道1传输完成中断屏蔽                       |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0</p></td>
+<td><p>通道0传输完成中断屏蔽                       |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dmaif">
+<h3>DMA中断状态寄存器IF<a class="headerlink" href="#dmaif" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id19"><span class="problematic" id="id20">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>IF</p></td>
+<td><p>0x0C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道中断状态               |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>CH0</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH1</p></td>
+<td><p>通道1传输完成中断，写1清零                  |</p>
+<p>1：中断发生                                 |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0</p></td>
+<td><p>通道0传输完成中断，写1清零                  |</p>
+<p>1：中断发生                                 |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="m0dstsgie">
+<h3>M0总线一侧传输完成中断使能寄存器DSTSGIE<a class="headerlink" href="#m0dstsgie" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id21"><span class="problematic" id="id22">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTSGIE</p></td>
+<td><p>0x10</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>scatter gathe 0总线一侧传输完成中断使能 |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>CH1</p></td>
+<td><p>CH1 M0总线一侧传输完成中断使能              |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>CH1HF</p></td>
+<td><p>CH1 M0总线一侧传输完成1/2中断使能           |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH0</p></td>
+<td><p>CH0 M0总线一侧传输完成中断使能              |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0HF</p></td>
+<td><p>CH0 M0总线一侧传输完成1/2中断使能           |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="m0dstsgim">
+<h3>M0总线一侧传输完成中断屏蔽寄存器DSTSGIM<a class="headerlink" href="#m0dstsgim" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id23"><span class="problematic" id="id24">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTSGIM</p></td>
+<td><p>0x14</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>scatter gather M0总线一侧传输完成中断屏蔽 |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>CH1</p></td>
+<td><p>CH1 M0总线一侧传输完成中断屏蔽              |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>CH1HF</p></td>
+<td><p>CH1 M0总线一侧传输完成1/2中断屏蔽           |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH0</p></td>
+<td><p>CH0 M0总线一侧传输完成中断屏蔽              |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0HF</p></td>
+<td><p>CH0 M0总线一侧传输完成1/2中断屏蔽           |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="m0dstsgif">
+<h3>M0总线一侧传输完成中断状态寄存器DSTSGIF<a class="headerlink" href="#m0dstsgif" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id25"><span class="problematic" id="id26">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTSGIF</p></td>
+<td><p>0x18</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>scatter gathe 0总线一侧传输完成中断状态 |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>CH1</p></td>
+<td><p>CH1 M0总线一侧传输完成中断状态，R/W1C       |</p>
+<p>1：中断已发生                               |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>CH1HF</p></td>
+<td><p>CH1 M0总线一侧传输完成1/2中断状态，R/W1C    |</p>
+<p>1：中断已发生                               |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH0</p></td>
+<td><p>CH0 M1总线一侧传输完成中断状态，R/W1C       |</p>
+<p>1：中断已发生                               |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0HF</p></td>
+<td><p>CH0 M1总线一侧传输完成1/2中断状态，R/W1C    |</p>
+<p>1：中断已发生                               |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="m1srcsgie">
+<h3>M1总线一侧传输完成中断使能寄存器SRCSGIE<a class="headerlink" href="#m1srcsgie" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id27"><span class="problematic" id="id28">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCSGIE</p></td>
+<td><p>0x1C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>scatter gather M1总线一侧传输完成中断使能 |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>CH1</p></td>
+<td><p>CH1 M1总线一侧传输完成中断使能              |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>CH1HF</p></td>
+<td><p>CH1 M1总线一侧传输完成1/2中断使能           |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH0</p></td>
+<td><p>CH0 M1总线一侧传输完成中断使能              |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0HF</p></td>
+<td><p>CH0 M1总线一侧传输完成1/2中断使能           |</p>
+<p>1：使能                                     |</p>
+<p>0：禁能                                     |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="m1srcsgim">
+<h3>M1总线一侧传输完成中断屏蔽寄存器SRCSGIM<a class="headerlink" href="#m1srcsgim" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id29"><span class="problematic" id="id30">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCSGIM</p></td>
+<td><p>0x20</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>scatter gather M1总线一侧传输完成中断屏蔽 |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>CH1</p></td>
+<td><p>CH1 M1总线一侧传输完成中断屏蔽              |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>CH1HF</p></td>
+<td><p>CH1 M1总线一侧传输完成1/2中断屏蔽           |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH0</p></td>
+<td><p>CH0 M1总线一侧传输完成中断屏蔽              |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0HF</p></td>
+<td><p>CH0 M1总线一侧传输完成1/2中断屏蔽           |</p>
+<p>1：屏蔽                                     |</p>
+<p>0：非屏蔽                                   |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="m1srcsgif">
+<h3>M1总线一侧传输完成中断状态寄存器SRCSGIF<a class="headerlink" href="#m1srcsgif" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id31"><span class="problematic" id="id32">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCSGIF</p></td>
+<td><p>0x24</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>scatter gathe 1总线一侧传输完成中断状态 |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:4</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>CH1</p></td>
+<td><p>CH1 M1总线一侧传输完成中断状态，R/W1C       |</p>
+<p>1：中断已发生                               |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>CH1HF</p></td>
+<td><p>CH1 M1总线一侧传输完成1/2中断状态，R/W1C    |</p>
+<p>1：中断已发生                               |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH0</p></td>
+<td><p>CH0 M1总线一侧传输完成中断状态，R/W1C       |</p>
+<p>1：中断已发生                               |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0HF</p></td>
+<td><p>CH0 M1总线一侧传输完成1/2中断状态，R/W1C    |</p>
+<p>1：中断已发生                               |</p>
+<p>0：中断未发生                               |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pri">
+<h3>通道优先设定寄存器PRI<a class="headerlink" href="#pri" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id33"><span class="problematic" id="id34">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>PRI</p></td>
+<td><p>0x3C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道优先级设定             |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>CH0</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:2</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>CH1</p></td>
+<td><p>DMA CH1优先级                               |</p>
+<p>1：该通道为高优先级                         |</p>
+<p>0：该通道为低优先级。                       |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>CH0</p></td>
+<td><p>DMA CH0优先级                               |</p>
+<p>1：该通道为高优先级                         |</p>
+<p>0：该通道为低优先级。                       |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ncrn">
+<h3>通道n控制寄存器CRn<a class="headerlink" href="#ncrn" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id35"><span class="problematic" id="id36">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>CRn</p></td>
+<td><p>0 x40*n +  0x00</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道控制                   |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>LEN</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>LEN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>LEN</strong></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:28</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>27</p></td>
+<td><p>SETPOP</p></td>
+<td><p>步进传输。在C                               | RIEN为1时，每触发一次，传送一个单位的数据。 |</p>
+<p>注意：                                      |</p>
+<p>步进模式将屏蔽OPBURST配置，即在             | URST配置为INCR4的情况下，仍然按SINGLE传输。 |</p>
+<p>步进模式不支持M0                            | 配置不同的OPWIDTH，因为OPWIDTH不同时，两组 | 要的TRIG次数不一样，会造成数据传输出错。 |</p>
+<p>模式下，当传输目标地址为固定地址模式，且O | DTH为BYTE或HALFWORD时，每次传输的有效数据在 | 置于低位。(因为无法通过地址识别有效字节) |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>26</p></td>
+<td><p>AUTORE</p></td>
+<td><p>Auto Restart, 通道在传输完成后，是否自动重新启动          |</p>
+<p>0：传输完成后停止                           |</p>
+<p>1 完成后自动按照上一次的配置重新启动传输。 |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>25</p></td>
+<td><p>TXEN</p></td>
+<td><p>TX软件启动传输，传输方向为SRCDST            |</p></td>
+</tr>
+<tr class="row-even"><td><p>24</p></td>
+<td><p>RXEN</p></td>
+<td><p>RX软件启动传输，传输方向为DSTSRC            |</p></td>
+</tr>
+<tr class="row-odd"><td><p>23:20</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>19:0</p></td>
+<td><p>LEN</p></td>
+<td><p>DMA传输单元数量                             |</p>
+<p>0对应1个单位长度                            |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="namn">
+<h3>通道n地址模式寄存器AMn<a class="headerlink" href="#namn" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id37"><span class="problematic" id="id38">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>AMn</p></td>
+<td><p>0 x40*n +  0x04</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道地址模式               |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td><p>SR RST</p></td>
+<td><p>S IT</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td><p>DS RST</p></td>
+<td><p>D IT</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:13</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>SRCBURST</p></td>
+<td><p>源地址传输模式                              |</p>
+<p>0： Single                                  |</p>
+<p>1： Burst（Inc4）                           |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>11:10</p></td>
+<td><p>SRCBIT</p></td>
+<td><p>源地址传输宽度                              |</p>
+<p>00：字节                                    |</p>
+<p>01：半字                                    |</p>
+<p>10：字                                      |</p>
+<p>11：保留                                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9:8</p></td>
+<td><p>SRCAM</p></td>
+<td><p>源地址模式                                  |</p>
+<p>00：地址固定                                |</p>
+<p>01：地址递增                                |</p>
+<p>10：scatter gather                          |</p>
+<p>11：保留                                    |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>7:5</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>DSTBURST</p></td>
+<td><p>目的地址传输类型                            |</p>
+<p>0：Single                                   |</p>
+<p>1：Burst（Inc4）                            |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>3:2</p></td>
+<td><p>DSTBIT</p></td>
+<td><p>目的地址传输宽度                            |</p>
+<p>00：字节                                    |</p>
+<p>01：半字                                    |</p>
+<p>10：字                                      |</p>
+<p>11：保留                                    |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>1:0</p></td>
+<td><p>DSTAM</p></td>
+<td><p>目的地址模式                                |</p>
+<p>00：地址固定                                |</p>
+<p>01：地址递增                                |</p>
+<p>10：scatter gather                          |</p>
+<p>11：保留                                    |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ndstn">
+<h3>通道n目的地址寄存器DSTn<a class="headerlink" href="#ndstn" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id39"><span class="problematic" id="id40">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTn</p></td>
+<td><p>0 x40*n +  0x08</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道n目的地址寄存器        |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DST</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>DST</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DST</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DST</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DST</p></td>
+<td><p>目的地址                                    |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="n1dstsgaddrn1">
+<h3>通道n目的分散收集地址1寄存器DSTSGADDRn1<a class="headerlink" href="#n1dstsgaddrn1" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id41"><span class="problematic" id="id42">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn1</p></td>
+<td><p>0 x40*n +  0xC</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>Destination Scatter Gather</p>
+<p>ress通道n目的分散收集地址1 |</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DSTSGADDRn1</p></td>
+<td><p>Destination Scatter Gather Address通道n目的分散收集地址1               |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="n2dstsgaddrn2">
+<h3>通道n目的分散收集地址2寄存器DSTSGADDRn2<a class="headerlink" href="#n2dstsgaddrn2" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id43"><span class="problematic" id="id44">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn2</p></td>
+<td><p>0 x40*n +  0x10</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>Destination Scatter Gather</p>
+<p>ress通道n目的分散收集地址2 |</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DSTSGADDRn2</p></td>
+<td><p>Destination Scatter Gather Address通道n目的分散收集地址2               |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ndstsgaddrn3">
+<h3>通道n目的分散收集地址寄存器DSTSGADDRn3<a class="headerlink" href="#ndstsgaddrn3" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id45"><span class="problematic" id="id46">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn3</p></td>
+<td><p>0 x40*n +  0x24</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>Destination Scatter Gather</p>
+<p>ress通道n目的分散收集地址3 |</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTSGADDRn3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>DSTSGADDRn3</p></td>
+<td><p>Destination Scatter Gather Address通道n目的分散收集地址3               |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nmuxn">
+<h3>通道n握手信号选择寄存器MUXn<a class="headerlink" href="#nmuxn" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id47"><span class="problematic" id="id48">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>MUXn</p></td>
+<td><p>0 x40*n +  0x18</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道n握手信号选择寄存器    |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>EX EN</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>S SEN</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>D SEN</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:20</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>19</p></td>
+<td><p>EXTHSEN</p></td>
+<td><p>触发功能使能                                |</p>
+<p>1：使能，TRIGGER触发                        |</p>
+<p>0：关闭，由启动信号TXEN/RXEN进行启动        |</p>
+<p>注1：需要使用这个寄                         | ，必须在其它相关寄存器配置完成之后再使能 |</p>
+<p>注2：EXT                                    | N=1时，也需置TXEN或RXEN才能启动触发传输功能 |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>18:16</p></td>
+<td><p>EXTHSSIG</p></td>
+<td><p>TRIGGER信号触发配置                         |</p>
+<p>000：TIMER0                                 |</p>
+<p>001：TIMER1                                 |</p>
+<p>010：TIMER2                                 |</p>
+<p>011：TIMER3                                 |</p>
+<p>100：TIMER4                                 |</p>
+<p>101：DMA_TRIG0                              |</p>
+<p>110：DMA_TRIG1                              |</p>
+<p>111：保留                                   |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>15:11</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>SRCHSEN</p></td>
+<td><p>M1上硬件触发源使能                          |</p>
+<p>1：硬件触发                                 |</p>
+<p>0：RXEN软件启动                             |</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>9:8</p></td>
+<td><p>SRCHSSIG</p></td>
+<td><p>M1上硬件触发源                              |</p>
+<p>11：选择编号为4*x+3的握手信号               |</p>
+<p>10：选择编号为4*x+2的握手信号               |</p>
+<p>01：选择编号为4*x+1的握手信号               |</p>
+<p>00：选择编号为4*x的握手信号                 |</p>
+<p>详见表格 6‑3                                |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>7:3</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>DSTHSEN</p></td>
+<td><p>M0上硬件触发源使能                          |</p>
+<p>1：硬件触发                                 |</p>
+<p>0：TXEN软件启动                             |</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>1:0</p></td>
+<td><p>DSTHSSIG</p></td>
+<td><p>M0上硬件触发源                              |</p>
+<p>11：选择编号为4*x+3的握手信号               |</p>
+<p>10：选择编号为4*x+2的握手信号               |</p>
+<p>01：选择编号为4*x+1的握手信号               |</p>
+<p>00：选择编号为4*x的握手信号                 |</p>
+<p>详见表格 6‑3                                |</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nsrcn">
+<h3>通道n源地址寄存器SRCn<a class="headerlink" href="#nsrcn" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id49"><span class="problematic" id="id50">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCn</p></td>
+<td><p>0 x40*n +  0x1C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>通道n源地址寄存器          |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCn</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCn</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCn</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCn</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SRCn</p></td>
+<td><p>源地址                                      |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="n1srcsgaddrn1">
+<h3>通道n源分散收集地址1寄存器SRCSGADDRn1<a class="headerlink" href="#n1srcsgaddrn1" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id51"><span class="problematic" id="id52">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn1</p></td>
+<td><p>0 x40*n +  0x20</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>Source Scatter Gather</p>
+<p>ddress通道n源分散收集地址1 |</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn1</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SRCSGADDRn1</p></td>
+<td><p>Source Scatter Gather Address通道n源分散收集地址1                 |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="n2srcsgaddrn2">
+<h3>通道n源分散收集地址2寄存器SRCSGADDRn2<a class="headerlink" href="#n2srcsgaddrn2" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id53"><span class="problematic" id="id54">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn2</p></td>
+<td><p>0 x40*n +  0x24</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>Source Scatter Gather</p>
+<p>ddress通道n源分散收集地址2 |</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn2</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SRCSGADDRn2</p></td>
+<td><p>Source Scatter Gather Address通道n源分散收集地址2                 |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="n3srcsgaddrn3">
+<h3>通道n源分散收集地址3寄存器SRCSGADDRn3<a class="headerlink" href="#n3srcsgaddrn3" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id55"><span class="problematic" id="id56">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn3</p></td>
+<td><p>0 x40*n +  0x28</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>Source Scatter Gather</p>
+<p>ddress通道n源分散收集地址3 |</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCSGADDRn3</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31:0</p></td>
+<td><p>SRCSGADDRn3</p></td>
+<td><p>Source Scatter Gather Address通道n源分散收集地址3                 |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="m0ndstsr">
+<h3>M0通道n状态寄存器DSTSR<a class="headerlink" href="#m0ndstsr" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id57"><span class="problematic" id="id58">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>DSTSR</p></td>
+<td><p>0 x40*n +  0x2C</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>M0通道n状态寄存器          |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTERR</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>D EN</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>DSTLEN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>DSTERR</p></td>
+<td><p>M0长度配置错误                              |</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:12</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>11:0</p></td>
+<td><p>DSTLEN</p></td>
+<td><p>M0剩余传输量                                |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="m1nsrcsr">
+<h3>M1通道n状态寄存器SRCSR<a class="headerlink" href="#m1nsrcsr" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>寄存器 |</p></td>
+<td><div class="line-block">
+<div class="line">偏移 |</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><a href="#id59"><span class="problematic" id="id60">|</span></a></div>
+</div>
+</td>
+<td><p>复位值 |    描 | |</p></td>
+<td><div class="line-block">
+<div class="line">|
+  |</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>SRCSR</p></td>
+<td><p>0 x40*n +  0x30</p></td>
+<td></td>
+<td><p>0 000000</p></td>
+<td><p>M1通道n状态寄存器          |</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>31</p></td>
+<td><p>30</p></td>
+<td><p>29</p></td>
+<td><p>28</p></td>
+<td><p>27</p></td>
+<td><p>26</p></td>
+<td><p>25</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCERR</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>23</p></td>
+<td><p>22</p></td>
+<td><p>21</p></td>
+<td><p>20</p></td>
+<td><p>19</p></td>
+<td><p>18</p></td>
+<td><p>17</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>14</p></td>
+<td><p>13</p></td>
+<td><p>12</p></td>
+<td><p>11</p></td>
+<td><p>10</p></td>
+<td><p>9</p></td>
+<td><p>8</p></td>
+</tr>
+<tr class="row-even"><td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td><p>S EN</p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>6</p></td>
+<td><p>5</p></td>
+<td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>SRCLEN</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>位域 |</p></td>
+<td><p>名称     | |</p></td>
+<td><p>描述                                        | |</p></td>
+</tr>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>SRCERR</p></td>
+<td><p>M1长度配置错误                              |</p></td>
+</tr>
+<tr class="row-odd"><td><p>30:12</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>11:0</p></td>
+<td><p>SRCLEN</p></td>
+<td><p>M1剩余传输量                                |</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="%E6%A8%A1%E6%8B%9F%E6%95%B0%E5%AD%97%E8%BD%AC%E6%8D%A2%E5%99%A8.html" class="btn btn-neutral float-left" title="模拟数字转换器（SAR ADC）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CRC%E8%AE%A1%E7%AE%97%E5%8D%95%E5%85%83.html" class="btn btn-neutral float-right" title="CRC计算单元（CRC）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, synwit.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1829 @@
+.. vim: syntax=rst
+
+**管脚配置**
+========
+
+SWM241PBT7
+----------
+
+|管脚配置002|
+
+图 5‑1 PBT7封装管脚配置图
+
+SWM241KBT7
+----------
+
+|管脚配置003|
+
+图 5‑2 KBT7封装管脚配置图
+
+管脚定义
+----
+
+.. list-table::
+   :widths: 20 20 20 20 20
+   :header-rows: 0
+
+
+   * - 管  |脚  |号  |
+     - | | |
+     - **管脚 | * 名称** | 型 |
+     - 类  | **
+       *  | |
+     - 复用功能**                         | | |
+
+   * - **PBT7**
+     - ** KBT 7**
+     -
+     -
+     -
+
+   * - 1
+     - /
+     - A4
+     - I/O
+     - UART0TX
+
+       PWM1AN
+
+       T7I
+
+       T7O
+
+       LCD_SEG19
+
+   * - 2
+     - 1
+     - A5
+     - I/O
+     - UART0RX
+
+       UART0TX
+
+       PWM0BN
+
+       ISP
+
+   * - 3
+     - 2
+     - RESETn
+     - I/O
+     - —
+
+   * - 4
+     - /
+     - A6
+     - I/O
+     - PWM_CLK0
+
+       LCD_SEG20
+
+       XLI
+
+   * - 5
+     - /
+     - D0
+     - I/O
+     - UART0RTS
+
+       PWM0AN
+
+       LCD_SEG21
+
+       XLO
+
+   * - 6
+     - 3
+     - D1
+     - I/O
+     - UART0CTS
+
+       PWM0A
+
+       LCD_SEG22
+
+   * - 7
+     - 4
+     - D2
+     - I/O
+     - XI
+
+   * - 8
+     - 5
+     - D3
+     - I/O
+     - PWM_CLK1
+
+       XO
+
+   * - 9
+     - 6
+     - CAP
+     - S
+     - 注：需要对地连接一个1uF电容            |
+
+   * - 10
+     - 7
+     - VSS
+     - S
+     - —
+
+   * - 11
+     - 8
+     - VDD
+     - S
+     - —
+
+   * - 12
+     - /
+     - D4
+     - I/O
+     - I2C0SCL
+
+       HALL1
+
+       LCD_SEG23
+
+   * - 13
+     - /
+     - D5
+     - I/O
+     - I2C0SDA
+
+       HALL2
+
+       LCD_COM0
+
+   * - 14
+     - 9
+     - D6
+     - I/O
+     - I2C0SCL
+
+       UART1RTS
+
+       CAN0TX
+
+       PWM0BRK
+
+       HALL0
+
+       LED_COM0
+
+       LCD_COM1
+
+   * - 15
+     - 10
+     - D7
+     - I/O
+     - I2C0SDA
+
+       UART1CTS
+
+       CAN0RX
+
+       PWM2AN
+
+       LED_COM1
+
+       LCD_COM2
+
+   * - 16
+     - 11
+     - D8
+     - I/O
+     - PWM2A
+
+       HALL0
+
+       T3I
+
+       T3O
+
+       LED_COM2
+
+       LCD_COM3
+
+   * - 17
+     - 12
+     - D9
+     - I/O
+     - UART1TX
+
+       HALL1
+
+       T3I
+
+       T3O
+
+       LED_COM3
+
+   * - /
+     - 13
+     - A0
+     - I/O
+     - SPI0SSEL
+
+       UART1RX
+
+       HALL2
+
+       LED_COM4
+
+   * - /
+     - 14
+     - A1
+     - I/O
+     - I2C1SCL
+
+       SPI0SCLK
+
+       PWMBRK1
+
+       LED_COM5
+
+   * - /
+     - 15
+     - A2
+     - I/O
+     - I2C1SDA
+
+       SPI0MISO
+
+       UART2TX
+
+       LED_COM6
+
+   * - /
+     - 16
+     - C0
+     - I/O
+     - SPI0MOSI
+
+       UART2RX
+
+       PWM2BN
+
+       LED_COM7
+
+       LCD_SEG24
+
+   * - 18
+     - /
+     - C1
+     - I/O
+     - SPI1MOSI
+
+       PWM2B
+
+       T5O
+
+       LED_SEG17
+
+       LCD_SEG25
+
+   * - 19
+     - /
+     - C2
+     - I/O
+     - I2C0SDA
+
+       SPI1MISO
+
+       T5I
+
+       LED_SEG18
+
+       LCD_SEG26
+
+   * - 20
+     - /
+     - C3
+     - I/O
+     - I2C0SCL
+
+       SPI1SCLK
+
+       PWM2AN
+
+       T1I
+
+       T1O
+
+       LED_SEG19
+
+       LCD_SEG27
+
+   * - 21
+     - /
+     - D10
+     - I/O
+     - I2C1SCL
+
+       SPI0SCLK
+
+       PWM2B
+
+       RTC_1HZ
+
+       LCD_SEG28
+
+   * - 22
+     - /
+     - D11
+     - I/O
+     - I2C1SDA
+
+       SPI0MISO
+
+       UART3RX
+
+       PWM2A
+
+       LCD_SEG29
+
+   * - 23
+     - /
+     - D12
+     - I/O
+     - SPI0MOSI
+
+       UART3TX
+
+       PWM2B
+
+       T4I
+
+       T4O
+
+       LCD_SEG30
+
+   * - 24
+     - 17
+     - B0
+     - I/O
+     - SPI1MOSI
+
+       UART3TX
+
+       PWM2A
+
+       T2I
+
+       T2O
+
+       LCD_SEG31
+
+   * - 25
+     - 18
+     - B1
+     - I/O
+     - SPI1MISO
+
+       UART3RX
+
+       PWM2B
+
+       T1I
+
+       T1O
+
+       LED_SEG0
+
+       LCD_SEG0
+
+   * - 26
+     - 19
+     - B2
+     - I/O
+     - I2C0SCL
+
+       SPI0SCLK
+
+       PWM3B
+
+       T2I
+
+       T2O
+
+       LED_SEG1
+
+       LCD_SEG1
+
+   * - 27
+     - 20
+     - B3
+     - I/O
+     - I2C0SDA
+
+       I2C1SCL
+
+       SPI0MISO
+
+       UART2RX
+
+       PWM3BN
+
+       T3I
+
+       T3O
+
+       LED_SEG2
+
+       LCD_SEG2
+
+   * - 28
+     - 21
+     - B4
+     - I/O
+     - I2C1SDA
+
+       SPI0MOSI
+
+       UART2TX
+
+       CAN0TX
+
+       PWM2BN
+
+       T4I
+
+       T4O
+
+       LED_SEG3
+
+       LCD_SEG3
+
+   * - 29
+     - 22
+     - B5
+     - I/O
+     - SPI1MOSI
+
+       UART3TX
+
+       CAN0RX
+
+       PWM2AN
+
+       T5I
+
+       T5O
+
+       LED_SEG4
+
+       LCD_SEG4
+
+   * - 30
+     - 23
+     - B6
+     - I/O
+     - I2C1SDA
+
+       SPI1MISO
+
+       UART3RX
+
+       T6I
+
+       T6O
+
+       LED_SEG5
+
+       LCD_SEG5
+
+   * - 31
+     - 24
+     - B7
+     - I/O
+     - I2C1SCL
+
+       SPI1SCLK
+
+       T7I
+
+       T7O
+
+       LED_SEG6
+
+       LCD_SEG6
+
+   * - 32
+     - /
+     - B8
+     - I/O
+     - UART1TX
+
+       LCD_SEG7
+
+   * - 33
+     - 25
+     - B9
+     - I/O
+     - UART1RX
+
+       LED_SEG7
+
+       LCD_SEG8
+
+       ADC0_CH8
+
+   * - 34
+     - /
+     - A7
+     - I/O
+     - SPI1SSEL
+
+       UART2RTS
+
+       LED_SEG12
+
+       LCD_SEG9
+
+       ADC0_CH7
+
+   * - 35
+     - /
+     - A8
+     - I/O
+     - UART2CTS
+
+       LED_SEG13
+
+       LCD_SEG10
+
+       ADC0_CH6
+
+   * - 36
+     - /
+     - A9
+     - I/O
+     - PWM0B
+
+       LED_SEG14
+
+       LCD_SEG11
+
+       ADC0_CH5
+
+   * - 37
+     - 26
+     - A10
+     - I/O
+     - SWCLK
+
+       T7I
+
+       T7O
+
+       LED_SEG15
+
+       LCD_SEG12
+
+       ADC0_CH4
+
+   * - 38
+     - 27
+     - A11
+     - I/O
+     - SWDIO
+
+       PWM3A
+
+       LED_SEG16
+
+       LCD_SEG13
+
+       ADC0_CH3
+
+   * - 39
+     - /
+     - A12
+     - I/O
+     - T6I
+
+       T6O
+
+       LCD_SEG14
+
+       ADC0_CH2
+
+   * - 40
+     - 28
+     - A13
+     - I/O
+     - PWM3B
+
+       ADC0_CH1
+
+   * - 41
+     - 29
+     - A14
+     - I/O
+     - SPI0CLK
+
+       PWM3AN
+
+       ADC0_CH0
+
+       ADC0_REFP
+
+   * - /
+     - /
+     - A15
+     - I/O
+     - PWM3BN
+
+   * - 42
+     - 30
+     - D13
+     -
+     - I2C0SDA
+
+       SPI0MISO
+
+       UART0RX
+
+       T0O
+
+       LED_SEG8
+
+       LCD_SEG15
+
+       ADC0_CH9
+
+   * - 43
+     - 31
+     - D14
+     -
+     - SPI0MOSI
+
+       UART0TX
+
+       PWM1BN
+
+       T0I
+
+       LED_SEG9
+
+       LCD_SEG16
+
+       ADC0_CH10
+
+   * - 44
+     - 32
+     - A3
+     - I/O
+     - I2C0SCL
+
+       SPI1SSEL
+
+       PWM1A
+
+       T2I
+
+       T2O
+
+       LED_SEG11
+
+       LCD_SEG18
+
+       ADC0_CH11
+
+
+*注1：I=输入，O=输出，S=电源*
+
+*注2：LED_COMx（x=0, …, 7）集成大电流SINK能力*
+
+功能描述
+----
+
+.. list-table::
+   :widths: 50 50
+   :header-rows: 0
+
+
+   * - 管脚名称    | 描述
+     - |
+
+   * - I2CxSCL
+     - I2Cx模块时钟引脚                                       |
+
+   * - I2CxSDA
+     - I2Cx模块数据引脚                                       |
+
+   * - SPIxSSEL
+     - SPIx模块片选引脚                                       |
+
+   * - SPIxCLK
+     - SPIx模块时钟引脚                                       |
+
+   * - SPIxMISO
+     - SPIx模块主机接收引脚                                   |
+
+   * - SPIxMOSI
+     - SPIx模块主机发送引脚                                   |
+
+   * - UARTxRX
+     - UARTx模块数据接收引脚                                  |
+
+   * - UARTxTX
+     - UARTx模块数据发送引脚                                  |
+
+   * - UARTxCTS
+     - UARTx模块发送允许引脚                                  |
+
+   * - UARTxRTS
+     - UARTx模块接收请求引脚                                  |
+
+   * - CANxRX
+     - CANx模块接收引脚                                       |
+
+   * - CANxTX
+     - CANx模块发送引脚                                       |
+
+   * - PWMxA
+     - PWM模块第x组A路输出引脚                                |
+
+   * - PWMxB
+     - PWM模块第x组B路输出引脚                                |
+
+   * - PWMxAN
+     - PWM模块第x组A路反向输出引脚                            |
+
+   * - PWMxBN
+     - PWM模块第x组B路反向输出引脚                            |
+
+   * - PWM_CLKx
+     - PWM PULSE引脚                                          |
+
+   * - PWMxBRK
+     - PWMx模块的BRAKE输出引脚                                |
+
+   * - TxI
+     - TIMERx模块输入捕获引脚                                 |
+
+   * - TxO
+     - TIMERx模块输出捕获引脚                                 |
+
+   * - HALLx
+     - 霍尔模块输入引脚x                                      |
+
+   * - LED_COMx
+     - LED模块COM引脚x                                        |
+
+   * - LED_SEGx
+     - LED模块SEG引脚x                                        |
+
+   * - LCD_COMx
+     - LCD模块COM引脚x                                        |
+
+   * - LCD_SEGx
+     - LCD模块SEG引脚x                                        |
+
+   * - ADC0_CHx
+     - ADC0模块通道x输入引脚                                  |
+
+   * - ADC0_REFP
+     - ADC0 REFP基准正向输入引脚                              |
+
+   * - ISP
+     - ISP功能引脚                                            |
+
+   * - RESETn
+     - 芯片复位功能引脚，低电平复位                           |
+
+   * - RTC_1HZ
+     - RTC 1Hz 输出引脚                                       |
+
+   * - XLI
+     - 外部低频晶振输入引脚                                   |
+
+   * - XLO
+     - 外部低频晶振输出引脚                                   |
+
+   * - XI
+     - 外部高频晶振输入引脚                                   |
+
+   * - XO
+     - 外部高频晶振输出引脚                                   |
+
+   * - CAP
+     - LDO电容引脚                                            |
+
+   * - VSS
+     - 芯片电源地引脚                                         |
+
+   * - VDD
+     - 芯片电源引脚                                           |
+
+   * - SWCLK
+     - 下载器SWCLK引脚                                        |
+
+   * - SWDIO
+     - 下载器SWDIO引脚                                        |
+
+
+管脚复用功能
+------
+
+PORTA管脚功能通过PORTCON模块的PORTA_FUNC0和PORTA_FUNC1寄存器对应位域配置。请使用驱动库提供的PORT_Init函数和功能宏定义配置管脚功能，提高代码可读性。
+
+表格 5‑1 PORTA复用功能表
+
+.. list-table::
+   :widths: 8 8 8 8 8 8 8 8 8 8 8 8
+   :header-rows: 0
+
+
+   * - 管脚
+     - | 功 | 能0  |
+     - 功 | 能 | 1  |
+     - |
+       |
+         |
+     - |
+       |
+        |
+       能 |
+       3
+     - |
+       |
+       | 功
+        |
+       4
+     - |
+       |
+        功
+       | 能
+       5
+     - |
+       |
+       功 |
+        能
+       6
+     - |
+       |
+        |
+       能 |
+       7
+     - |
+       |
+       |
+        |
+       8
+     - | 其
+       | 他
+        |
+         |
+       15
+     - |
+
+   * - PA0
+     - A0
+     -
+     - U AR T1 RX
+     - H AL L2
+     - LE D_ CO M4
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PA1
+     - A1
+     - I 2C 1S CL
+     - S PI 0C LK
+     - P WM BR K1
+     - LE D_ CO M5
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PA2
+     - A2
+     - I 2C 1S DA
+     - SP I0 MI SO
+     - U AR T2 TX
+     - LE D_ CO M6
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PA3
+     - A3/  A DC0_ CH11
+     - I 2C 0S CL
+     - SP I1 SS EL
+     - P WM 1A
+     - T 2I
+     - T 2O
+     - L ED _S EG 11
+     -
+     -
+     - L CD _S EG 18
+     -
+
+   * - PA4
+     - A4
+     - U AR T0 TX
+     - PW M1 AN
+     - T 7I
+     - T 7O
+     -
+     -
+     -
+     -
+     - L CD _S EG 19
+     -
+
+   * - PA5
+     - A5
+     - U AR T0 RX
+     - U AR T0 TX
+     - PW M0 BN
+     -
+     -
+     -
+     -
+     -
+     - -
+     - ISP
+
+   * - PA6
+     - A6
+     - PW M_ CL K0
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     - L CD _S EG 20
+     - XLI
+
+   * - PA7
+     - A7/   Adc0 _CH7
+     - SP I1 SS EL
+     - UA RT 2R TS
+     - L ED _S EG 12
+     -
+     -
+     -
+     -
+     -
+     - LC D_ SE G9
+     -
+
+   * - PA8
+     - A8/   ADC0 _CH6
+     - UA RT 2C TS
+     - L ED _S EG 13
+     -
+     -
+     -
+     -
+     -
+     -
+     - L CD _S EG 10
+     -
+
+   * - PA9
+     - A9/   ADC0 _CH5
+     - P WM 0B
+     - L ED _S EG 14
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PA10
+     - A10/   ADC0 _CH4
+     - S WC LK
+     - T 7I
+     - T 7O
+     - L ED _S EG 15
+     -
+     -
+     -
+     -
+     - L CD _S EG 12
+     -
+
+   * - PA11
+     - A11/   ADC0 _CH3
+     - S WD IO
+     - P WM 3A
+     - L ED _S EG 16
+     -
+     -
+     -
+     -
+     -
+     - L CD _S EG 13
+     -
+
+   * - PA12
+     - A12/   ADC0 _CH2
+     - T 6I
+     - T 6O
+     -
+     -
+     -
+     -
+     -
+     -
+     - L CD _S EG 14
+     -
+
+   * - PA13
+     - A13/   ADC0 _CH1
+     - P WM 3B
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PA14
+     - A14/  A DC0_ CH0/  A DC0_ REFP
+     - S PI 0C LK
+     - PW M3 AN
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PA15
+     - A15
+     - PW M3 BN
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+
+*注：PA15专用于SLCD模块电源域控制，使用SLCD时需要设置为输出高电平为SLCD供电，不使用SLCD时设置为输出低电平。*
+
+|
+
+PORTB管脚功能通过PORTCON模块的PORTB_FUNC0和PORTB_FUNC1寄存器对应位域配置。请使用驱动库提供的PORT_Init函数和功能宏定义配置管脚功能，提高代码可读性。
+
+表格 5‑2 PORTB复用功能
+
+.. list-table::
+   :widths: 8 8 8 8 8 8 8 8 8 8 8 8
+   :header-rows: 0
+
+
+   * - 管脚
+     - | 功 | 能0  |
+     - 功  | 能1 | |
+     - | 功
+       | 能
+         |
+     - | 功
+       | 能4
+          |
+     - | 功 |
+       | 能 |
+           |
+     - 功  | 能6 | 5  |
+     - 功  | 能7 | |
+     - | 功
+       | 能
+          |
+     - |
+         其
+       8  |
+     - |
+
+       5  |
+     -
+
+       他  |
+
+   * - PB0
+     - B0
+     - SP I1M OSI
+     - U AR T3 TX
+     - PW M2A
+     - T2I
+     - T 2O
+     -
+     -
+     -
+     - LCD _SE G31
+     -
+
+   * - PB1
+     - B1
+     - SP I1M ISO
+     - U AR T3 RX
+     - PW M2B
+     - T1I
+     - T 1O
+     - LE D_S EG0
+     -
+     -
+     - LC D_S EG0
+     -
+
+   * - PB2
+     - B2
+     - I 2C0 SCL
+     - S PI 0C LK
+     - PW M3B
+     - T2I
+     - T 2O
+     - LE D_S EG1
+     -
+     -
+     - LC D_S EG1
+     -
+
+   * - PB3
+     - B3
+     - I 2C0 SDA
+     - I 2C 0S CL
+     - SP I0M ISO
+     - U ART 2RX
+     - PW M3 BN
+     - T3I
+     - T3O
+     - LE D_ SE G2
+     - LC D_S EG2
+     -
+
+   * - PB4
+     - B4
+     - I 2C1 SDA
+     - SP I0 MO SI
+     - U ART 2TX
+     - CAN 0TX
+     - PW M2 BN
+     - T4I
+     - T4O
+     - LE D_ SE G3
+     - LC D_S EG3
+     -
+
+   * - PB5
+     - B5
+     -
+     - SP I1 MO SI
+     - U ART 3TX
+     - CAN 0RX
+     - PW M2 AN
+     - T5I
+     - T5O
+     - LE D_ SE G4
+     - LC D_S EG4
+     -
+
+   * - PB6
+     - B6
+     -
+     - I 2C 1S DA
+     - SP I1M ISO
+     - U ART 3RX
+     - T 6I
+     - T6O
+     - LE D_S EG5
+     -
+     - LC D_S EG5
+     -
+
+   * - PB7
+     - B7
+     - I 2C1 SCL
+     - S PI 1C LK
+     - T7I
+     - T7O
+     - LE D_ SE G6
+     -
+     -
+     -
+     - LC D_S EG6
+     -
+
+   * - PB8
+     - B8
+     - U ART 1TX
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     - LC D_S EG7
+     -
+
+   * - PB9
+     - B9/   ADC0 _CH8
+     - U ART 1RX
+     - LE D_ SE G7
+     -
+     -
+     -
+     -
+     -
+     -
+     - LC D_S EG8
+     -
+
+   * - PB10
+     - B10
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PB11
+     - B11
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PB12
+     - B12
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PB13
+     - B13
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PB14
+     - B14
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PB15
+     - B15
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+
+PORTC管脚功能通过PORTCON模块的PORTC_FUNC0和PORTC_FUNC1寄存器对应位域配置。请使用驱动库提供的PORT_Init函数和功能宏定义配置管脚功能，提高代码可读性。
+
+表格 5‑3 PORTC复用功能
+
+.. list-table::
+   :widths: 8 8 8 8 8 8 8 8 8 8 8 8
+   :header-rows: 0
+
+
+   * - 管脚
+     - | 功 | 能0  |
+     - 功  | 能1 | |
+     - | 功
+       | 能
+         |
+     - | 功
+       | 能4
+          |
+     - | 功 |
+       | 能 |
+           |
+     - 功  | 能6 | 5  |
+     - 功  | 能7 | |
+     - | 功
+       | 能
+          |
+     - | 其
+        他
+       8  |
+     - |
+
+       15  |
+     -
+
+           |
+
+   * - PC0
+     - C0
+     - SP I0M OSI
+     - U AR T2 RX
+     - PWM 2BN
+     - LE D_C OM7
+     -
+     -
+     -
+     -
+     - LCD _SE G24
+     -
+
+   * - PC1
+     - C1
+     - SP I1M OSI
+     - P WM 2B
+     - T5O
+     - LED _SE G17
+     -
+     -
+     -
+     -
+     - LCD _SE G25
+     -
+
+   * - PC2
+     - C2
+     - I 2C0 SDA
+     - SP I1 MI SO
+     - T5I
+     - LED _SE G18
+     -
+     -
+     -
+     -
+     - LCD _SE G26
+     -
+
+   * - PC3
+     - C3
+     - I 2C0 SCL
+     - S PI 1C LK
+     - PWM 2AN
+     - T1I
+     - T 1O
+     - LED _SE G19
+     -
+     -
+     - LCD _SE G27
+     -
+
+   * - PC4
+     - C4
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC5
+     - C5
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC6
+     - C6
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC7
+     - C7
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC8
+     - C8
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC9
+     - C9
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC10
+     - C10
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC11
+     - C11
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC12
+     - C12
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC13
+     - C13
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC14
+     - C14
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+   * - PC15
+     - C15
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+
+
+PORTD管脚功能通过PORTCON模块的PORTD_FUNC0和PORTD_FUNC1寄存器对应位域配置。请使用驱动库提供的PORT_Init函数和功能宏定义配置管脚功能，提高代码可读性。
+
+表格 5‑4 PORTD复用功能
+
+.. list-table::
+   :widths: 8 8 8 8 8 8 8 8 8 8 8 8
+   :header-rows: 0
+
+
+   * - 管脚
+     - | 功 | 能0  |
+     - 功  | 能1 | |
+     - | 功
+       | 能
+         |
+     - | 功
+       | 能
+       3  |
+     - 功 | 能 | |
+     - 功 | 能 | 5  |
+     - | 功
+       | 能
+         |
+     - | 功
+       | 能
+       7  |
+     - 其 他 | |
+     -
+
+       15 |
+     -
+
+           |
+
+   * - PD0
+     - D0
+     - UA RT0 RTS
+     - PW M0 AN
+     -
+     -
+     -
+     -
+     -
+     -
+     - L CD _S EG 21
+     - XLO
+
+   * - PD1
+     - D1
+     - UA RT0 CTS
+     - P WM 0A
+     -
+     -
+     -
+     -
+     -
+     -
+     - L CD _S EG 22
+     -
+
+   * - PD2
+     - D2
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     - XI
+
+   * - PD3
+     - D3
+     - PW M_C LK1
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
+     - XO
+
+   * - PD4
+     - D4
+     - I 2C0 SCL
+     - H AL L1
+     -
+     -
+     -
+     -
+     -
+     -
+     - L CD _S EG 23
+     -
+
+   * - PD5
+     - D5
+     - I 2C0 SDA
+     - H AL L2
+     -
+     -
+     -
+     -
+     -
+     -
+     - LC D_ CO M0
+     -
+
+   * - PD6
+     - D6
+     - I 2C0 SCL
+     - UA RT 1R TS
+     - CA N0 TX
+     - P WM BR K0
+     - H AL L0
+     - LE D_ CO M0
+     -
+     -
+     - LC D_ CO M1
+     -
+
+   * - PD7
+     - D7
+     - I 2C0 SDA
+     - UA RT 1C TS
+     - CA N0 RX
+     - PW M2 AN
+     - LE D_ CO M1
+     -
+     -
+     -
+     - LC D_ CO M2
+     -
+
+   * - PD8
+     - D8
+     - PW M2A
+     - H AL L0
+     - T 3I
+     - T 3O
+     - LE D_ CO M2
+     -
+     -
+     -
+     - LC D_ CO M3
+     -
+
+   * - PD9
+     - D9
+     - U ART 1TX
+     - H AL L1
+     - T 3I
+     - T 3O
+     - LE D_ CO M3
+     -
+     -
+     -
+     - -
+     -
+
+   * - PD10
+     - D10
+     - I 2C1 SCL
+     - S PI 0C LK
+     - P WM 2B
+     - R TC _1 HZ
+     -
+     -
+     -
+     -
+     - L CD _S EG 28
+     -
+
+   * - PD11
+     - D11
+     - I 2C1 SDA
+     - SP I0 MI SO
+     - U AR T3 RX
+     - P WM 2A
+     -
+     -
+     -
+     -
+     - L CD _S EG 29
+     -
+
+   * - PD12
+     - D12
+     - SP I0M OSI
+     - U AR T3 TX
+     - P WM 2B
+     - T 4I
+     - T 4O
+     -
+     -
+     -
+     - L CD _S EG 30
+     -
+
+   * - PD13
+     - D13/   ADC0 _CH9
+     - I 2C0 SDA
+     - SP I0 MI SO
+     - U AR T0 RX
+     - T 0O
+     - LE D_ SE G8
+     -
+     -
+     -
+     - L CD _S EG 15
+     -
+
+   * - PD14
+     - D14/  A DC0_ CH10
+     - SP I0M OSI
+     - U AR T0 TX
+     - PW M1 BN
+     - T 0I
+     -
+     - LE D_ SE G9
+     -
+     -
+     - L CD _S EG 16
+     -
+
+   * - PD15
+     - D15
+     - SP I0S SEL
+     - P WM 1B
+     - T 0I
+     - T 0O
+     - L ED _S EG 10
+     -
+     -
+     -
+     - L CD _S EG 17
+     -
+
+
+.. |管脚配置002| image:: media\管脚配置002.emf
+.. |管脚配置003| image:: media\管脚配置003.emf
